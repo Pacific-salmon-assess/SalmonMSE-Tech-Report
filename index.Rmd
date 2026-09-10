@@ -75,9 +75,10 @@ opts_chunk$set(
   #  cache = TRUE, # cache all chunks?
   #  autodep = TRUE, # try to guess which chunks depend on which in cache?
   fig.width = 6, # 'internal' plotting figure width (inches)
-  out.width = "80%", # output plotting width; adjust here or by chunk if desired
-  fig.asp = 1 / 1.618, # golden ratio; adjust here or by chunk if desired
-  dpi = 200 # adjust to taste; larger = higher resolution but larger file size
+  out.width = "100%", # output plotting width; adjust here or by chunk if desired
+  #fig.asp = 1 / 1.618, # golden ratio; adjust here or by chunk if desired
+  dpi = 200, # adjust to taste; larger = higher resolution but larger file size
+  echo = FALSE
 )
 ```
 
@@ -107,4 +108,6 @@ library(ggplot2) # used in examples in template example
 library(equatags) # used to make tables using flextable
 #equatags::mathjax_install()
 # add more packages here as needed
+
+compose <- flextable::compose
 ```

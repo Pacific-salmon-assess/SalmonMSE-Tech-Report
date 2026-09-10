@@ -1,0 +1,78 @@
+\newpage
+
+# APPENDIX `r new_appendix()`. MARK-SELECTIVE FISHING {#app:msf}
+
+If the mark rate $m$ of hatchery fish is greater than zero, then mark-selective fishing can be implemented for either the pre-terminal fishery, terminal fishery, or both with no retention on natural-origin fish.
+The mark rate is a proxy for retention and the harvest rate $u^\textrm{harvest}$ corresponds to the kept catch of hatchery-origin fish.
+The exploitation rate $u^\textrm{exploit}$ is calculated from kept catch of hatchery-origin fish and dead releases of natural-origin fish.
+Exploitation rates differ between hatchery-origin and natural-origin fish because there is no retention of the latter.
+
+Fishing mortality on hatchery-origin fish is partitioned into two parts for kept and release catch:
+
+\begin{align}
+  F^\textrm{kept,HO} &= mE\\
+  F^\textrm{rel,HO} &= (1 - m)\delta E
+  (\#eq:FishMortHatchery)
+\end{align}
+
+where $\delta$ is the proportion of released fish that die, i.e., release mortality.
+
+$E$ is an index of fishing effort, also referred to as the encounter rate by the fishery, that links together $F^\textrm{kept,HO}$ and $F^\textrm{rel,NO}$.
+
+Natural-origin fish experience exclusively fishing mortality due to deaths from release:
+
+\begin{align}
+  F^\textrm{rel,NO} = \delta E
+  (\#eq:FishMortNatural)
+\end{align}
+
+
+Intuitively, fishing effort can increase in a mark-selective fishery compared to a non-selective fishery.
+For example, if the mark rate is 20 percent, then the fishing effort could be 500 percent higher than in a non-selective fishery in order to attain the kept quota or bag limit.
+Additional catch and release mortality then occurs for un-marked fish, according to $\delta$.
+
+The kept catch $K$ are
+
+\begin{align}
+  K^\textrm{HO,PT}_{y,a} &= \dfrac{F^\textrm{kept,HO,PT}_y}{F^\textrm{kept,HO,PT}_y + F^\textrm{rel,HO,PT}_y}\left(1 - \exp(-v^\textrm{PT}_a[F^\textrm{kept,HO,PT}_y + F^\textrm{rel,HO,PT}_y])\right)N^\textrm{juv,HO}_{y,a}\\
+  K^\textrm{HO,T}_{y,a} &= \dfrac{F^\textrm{kept,HO,T}_y}{F^\textrm{kept,HO,T}_y + F^\textrm{rel,HO,T}_y}\left(1 - \exp(-v^\textrm{T}_a[F^\textrm{kept,HO,T}_y + F^\textrm{rel,HO,T}_y])\right)R^\textrm{HO}_{y,a}
+  (\#eq:KeptCatchMS)
+\end{align}
+
+If management is by target harvest rate for the preterminal and terminal fisheries, the corresponding $E$ is solved to satisfy:
+
+\begin{align}
+  u^\textrm{PT}_y &= \frac{\sum_aK^\textrm{HO,PT}_{y,a}\times \textrm{AEQ}_a}{\sum_a(K^\textrm{HO,PT}_{y,a} \times \textrm{AEQ}_a + N^\textrm{juv,HO}_{y,a}\exp(-v^\textrm{PT}_a [F^\textrm{kept,HO,PT}_y + F^\textrm{rel,HO,PT}_y])\times r_a)}\\
+  u^\textrm{T}_y &= \frac{\sum_aK^\textrm{HO,T}_{y,a}}{R^\textrm{HO}_{y,a}}
+  (\#eq:HarvTargetMS)
+\end{align}
+
+If management is by target catch, the corresponding $E$ is solved to satisfy:
+
+\begin{align}
+  K^\textrm{PT,target} &= \sum_a K^\textrm{HO,PT}_{y,a}\\
+  K^\textrm{T,target} &= \sum_a K^\textrm{HO,T}_{y,a}
+  (\#eq:CatchTargetMS)
+\end{align}
+
+The exploitation rate $U$ for natural-origin fish is calculated from dead discards. 
+The exploitation rate for hatchery-origin fish is calculated from kept catch and dead discards:
+
+\begin{align}
+  U^\textrm{NO,PT}_y &= \frac{\sum_aD^\textrm{NO,PT}_{y,a}\times \textrm{AEQ}_a}{\sum_a(D^\textrm{NO,PT}_{y,a} \times \textrm{AEQ}_a + N^\textrm{juv,NO}_{y,a}\exp(-v^\textrm{PT}_a F^\textrm{rel,NO,PT}_y)\times r_a)}\\
+  U^\textrm{HO,PT}_y &= \frac{\sum_a(D^\textrm{HO,PT}_{y,a} + K^\textrm{HO,PT}_{y,a})\times \textrm{AEQ}_a}{\sum_a((D^\textrm{HO,PT}_{y,a} + K^\textrm{HO,PT}_{y,a}) \times \textrm{AEQ}_a + N^\textrm{juv,HO}_{y,a}\exp(-v^\textrm{PT}_a [F^\textrm{kept,HO,PT} + F^\textrm{rel,HO,PT}]_y)\times r_a)}\\
+  U^\textrm{NO,T}_{y,a} &= \frac{\sum_aD^\textrm{NO,T}_{y,a}}{\sum_a R^\textrm{NO}_{y,a}}\\
+  U^\textrm{HO,T}_{y,a} &= \frac{\sum_a(D^\textrm{HO,T}_{y,a} + K^\textrm{HO,T}_{y,a})}{\sum_a R^\textrm{HO}_{y,a}}
+ (\#eq:ExpRateMS)
+\end{align}
+
+where $D$ is dead discards:
+
+\begin{align}
+D^\textrm{NO,PT}_{y,a} &= (1 - \exp(-v^\textrm{PT}_a F^\textrm{rel,NO,PT}_y)) N^\textrm{juv,NO}_{y,a}\\
+D^\textrm{HO,PT}_{y,a} &= \frac{F^\textrm{rel,HO,PT}_y}{F^\textrm{kept,HO,PT}_y + F^\textrm{rel,HO,PT}_y}(1 - \exp(-v^\textrm{PT}_a [F^\textrm{kept,HO,PT}_y + F^\textrm{rel,HO,PT}_y]))N^\textrm{juv,HO}_{y,a}\\
+D^\textrm{NO,T}_{y,a} &= (1 - \exp(-v\textrm{T}_a F^\textrm{rel,NO,T}_y))R^\textrm{NO}_{y,a}\\
+D^\textrm{HO,T}_{y,a} &= \frac{F^\textrm{rel,HO,T}_y}{F^\textrm{kept,HO,T}_y + F^\textrm{rel,HO,T}_y}(1 - \exp(-v^\textrm{T}_a [F^\textrm{kept,HO,T}_y + F^\textrm{rel,HO,T}_y]))R^\textrm{HO}_{y,a}
+  (\#eq:DiscardsMS)
+\end{align}
+

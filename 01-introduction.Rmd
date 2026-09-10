@@ -1,5 +1,60 @@
 # INTRODUCTION
 
-salmonMSE utilizes an age-structured model in the projections. The population is tracked by age and year but various dynamics correspond to the salmon life stages as described below.
+salmonMSE is a stochastic decision-support tool for Pacific salmon focusing on strategic trade-offs among harvest, hatchery and habitat management levers.
+salmonMSE can be used for risk-based analyses to evaluate the performance of and prioritize management actions and identify trade-offs towards achieving biological and harvest objectives.
 
-The model is also stochastic, for example, biological parameters representing uncertainty in the state of nature can be drawn from a probability distribution. For simplicity, the equations here describe the dynamics in a single simulation run. Potential stochastic parameters are noted in the package documentation.
+salmonMSE is a generalizable tool applicable across salmon species and populations, and expands upon previous simulation tools such as samSim [@holt2020] and AHA [@hsrg2020].
+These tools project a simulated population over successive generations to obtain the long-term equilibrium properties of the state dynamics.
+To accommodate more complex life histories, salmonMSE is age-structured which is useful for species that have returns comprising multiple brood-years.
+Age-structured dynamics also explicitly model juvenile mortality in the marine life stage.
+Importantly, salmonMSE was developed to comprehensively support evaluation of harvest policies, hatchery enhancement programs, and changes in early freshwater survival simultaneously.
+Finally, stochasticity can be incorporated in the model to evaluate outcomes across uncertain parameters.
+In general, its flexibility is intended to encapsulate a gradient of simple to more complex models as data availability to inform parameters allows.
+
+salmonMSE can be used to address questions such as:
+
+- How do mark-selective fisheries impact harvest and conservation objectives?
+- How does a change in hatchery release strategy impact harvest and conservation objectives?
+- How does a candidate broodtake rule impact the ability to achieve PNI and conservation objectives?
+- How do changes in environmental drivers impact ability to rebuild populations?
+- What combination of fishery exploitation rates and hatchery production targets meets spawner abundance objectives?
+
+# Dynamics equations
+
+This document is intended to be summary of the age-structured projection model in salmonMSE.
+The model is stochastic, and users have full control of stochastic, time-varying parameters.
+For example, users manually sample the desired probability density functions to generate Monte Carlo samples of a parameter and provide them to the model, or specify the year-specific values of a parameter to create a temporal trend in a parameter.
+In the interest of simplicity, the equations describe the biological dynamics within a single simulation replicate.
+
+The equations are structured in the following order:
+
+- Juvenile marine abundance in the beginning of the annual time step, followed by preterminal fishing
+- Maturation and recruitment of the mature component of the population, followed by terminal fishing
+- Escapement from marine fisheries to the in-river return, where there is broodtake for hatchery programs and further in-river removals
+- Spawner abundance and egg production
+- Survival to outmigrating juveniles of the next generation in the next time step
+- Advancement of age classes of juveniles that did not mature in the previous time step
+
+The corresponding R code is available on Github at [https://github.com/Blue-Matter/salmonMSE](https://github.com/Blue-Matter/salmonMSE).
+`ProjectSOM()` is the primary function that executes the projection and calls subsidiary functions that implement different components of the simulation (Table \@ref(tab:equation-table)).
+
+```{r equation-table, results="asis"} 
+#Equations <- read.csv("tables/EquationTable.csv")
+#flextable(Equations) |>
+#  #ftExtra::colformat_md(j="Eq_Num", metadata = rmarkdown::metadata) |>
+#  compose(j = "Eq_Num", value = as_paragraph(Eq_Num)) |>
+#  set_table_properties(layout = "autofit")
+#can't get references to show up in a table
+
+table_func <- data.frame(
+  Description = c("Entire projection", "Juvenile natural production (no habitat modeling)", "Juvenile natural production (with habitat modeling)", "Hatchery production", "Preterminal fishery", "Terminal fishery", "Spawners", "Fitness"),
+  Function = c("ProjectSOM()", "nextgen_SRR_func()", "nextgen_habitat_func()", 
+               "brood_func()", "catch_func()", "catch_func()", "calc_spawners()", "fitness_func()")
+)
+
+flextable(table_func) |>
+  set_caption("List of R functions that perform the various calculations.") %>%
+  width(j = 1:2, width = 3)
+```
+
+
