@@ -2,26 +2,30 @@
 
 # APPENDIX `r new_appendix()`. FITNESS EFFECTS ON SURVIVAL {#app:fitness}
 
-Reproductive success of first generation hatchery fish has been observed to be lower than their natural counterparts, and is accounted for in the $\gamma$ parameter [@withler2018].
+Reproductive success of first generation hatchery-origin fish has been observed to be lower than their natural counterparts, and is accounted for in the $\gamma$ parameter [@withler2018].
 
-Through genetic and epigenetic factors, survival of hatchery juveniles in the hatchery environment selects for fish with a phenotype best adapted for that environment, and likewise for juveniles spawned in the natural environment.
-Since these traits are heritable, the fitness of the natural population can shift away from the optimum for the natural environment towards that of the hatchery environment on an evolutionary time scale, i.e., over a number of generations, when hatchery fish are allowed to spawn.
+Through genetic and epigenetic factors, survival of juveniles in the hatchery environment selects for fish with a phenotype best adapted for that environment, and likewise for juveniles spawned in the natural environment.
+Since these traits are heritable, the fitness of the natural population can shift away from the optimum for the natural environment towards that of the hatchery environment on an evolutionary time scale, i.e., over a number of generations, when hatchery-origin fish spawn in the natural environment.
+
+This appendix describes the fitness of the population as hatchery-origin fish spawn in the natural environment.
+
+## Derivation of population fitness
 
 As described in @ford2002 and derived in @lande1976, the fitness loss function $W$ for an individual with phenotypic trait value $z$ in a given environment is
 
-\begin{align}
+\begin{equation}
  W(z) = \exp\left(\dfrac{-(z-\theta)^2}{2\omega^2}\right)
  (\#eq:FitnessLoss)
-\end{align}
+\end{equation}
 
 where $\theta$ is the optimum for that environment and $\omega^2$ is the fitness variance.
 
 If the phenotypic trait value $z$ in the population is a random normal variable with mean $\bar{z}$ and variance $\sigma^2$, then the mean fitness of the population in generation $g$ is $\bar{W}(z) = \int W(z) f(z) dz$, where $f(z)$ is the Gaussian probability density function. The solution is proportional to:
 
-\begin{align}
+\begin{equation}
   \bar{W}(z) \propto \exp\left(\dfrac{-(\bar{z}-\theta)^2}{2(\omega^2+\sigma^2)}\right)
   (\#eq:MeanFitness)
-\end{align}
+\end{equation}
 
 The mean phenotype $\bar{z}$ is calculated iteratively, where the change $\Delta\bar{z}$ from generation $g-1$ to $g$ is
 
@@ -40,7 +44,10 @@ where $h^2$ is the heritability of $z$ and $\bar{z}^\prime_{g-1}$ is the trait v
 \end{align}
 
 Let $\bar{z}^\prime_{g-1}(\theta)$ be a function that returns the mean trait value after selection in an environment with optimum value $\theta$.
-With a hatchery program, the mean trait value of the progeny in the natural environment is a weighted average of the mean trait value in natural and hatchery origin spawners, with selection in the natural environment, i.e., with optimum trait value $\theta^\textrm{natural}$:
+
+## Population fitness in natural and hatchery environments
+
+With a hatchery program, the mean trait value of the progeny in the natural environment is a weighted average of the mean trait value in natural-origin spawners and hatchery-origin spawners, with selection in the natural environment, i.e., with optimum trait value $\theta^\textrm{natural}$:
 
 \begin{align}
   \bar{z}^\textrm{natural}_g = & (1 - p^\textrm{HOSeff}_{g-1}) \times \left(\bar{z}^\textrm{natural}_{g-1} + [\bar{z}^{\prime\textrm{natural}}_{g-1}(\theta^\textrm{natural}) - \bar{z}^\textrm{natural}_{g-1}] h^2\right) +\\
@@ -50,7 +57,7 @@ With a hatchery program, the mean trait value of the progeny in the natural envi
 
 where $p^\textrm{HOSeff} = \gamma\times\textrm{HOS}/(\textrm{NOS} + \gamma\times\textrm{HOS})$.
 
-Similarly, the mean trait value in the hatchery environment $\bar{z}^\textrm{hatchery}_g$ is a weighted average of the mean trait value of the natural and hatchery broodtake, with selection in the hatchery environment, i.e., with optimum trait value $\theta^\textrm{hatchery}$:
+Similarly, the mean trait value in the hatchery environment $\bar{z}^\textrm{hatchery}_g$ is a weighted average of the mean trait value of the natural-origin brood and hatchery-origin brood, with selection in the hatchery environment, i.e., with optimum trait value $\theta^\textrm{hatchery}$:
 
 \begin{align}
   \bar{z}^\textrm{hatchery}_g = & p^\textrm{NOB}_{g-1} \times \left(\bar{z}^\textrm{natural}_{g-1} + [\bar{z}^{\prime\textrm{natural}}_{g-1}(\theta^\textrm{hatchery}) - \bar{z}^\textrm{natural}_{g-1}] h^2\right) +\\
@@ -60,7 +67,7 @@ Similarly, the mean trait value in the hatchery environment $\bar{z}^\textrm{hat
 
 where $p^\textrm{NOB} = \textrm{NOB}/(\textrm{NOB} + \textrm{HOB})$.
 
-The fitness variance $\omega^2$ and phenotype variance $\sigma^2$ are identical in the two environments.
+The fitness variance $\omega^2$ and phenotype variance $\sigma^2$ are assumed identical in the two environments.
 
 The mean fitness of generation $g$ in the natural environment is then:
 
@@ -69,9 +76,11 @@ The mean fitness of generation $g$ in the natural environment is then:
   (\#eq:GenMeanFitness)
 \end{align}
 
-### Mixed brood-year return
+Effectively, $\bar{W}$ is a penalty term (between 0-1) that approaches zero when the mean phenotype is far from the optimum $\theta$.
 
-If a mixed-brood year return in year $y$ across several ages $a$ produces the smolt cohort in year $y+1$, then the mean trait value in the progeny is calculated from a weighted average by brood year and age class fecundity:
+## Fitness in mixed brood-year returns
+
+If a mixed-brood year return in year $y$ across several ages $a$ produces the juveniles of age 1 in year $y+1$, then the mean trait value in the progeny is calculated from a weighted average by parental brood year and age class fecundity:
 
 \begin{align}
   \bar{z}^\textrm{natural}_{y+1} = & \sum_a p^\textrm{NOS}_{y,a} \times \left(\bar{z}^\textrm{natural}_{y-a+1} + [\bar{z}^{\prime\textrm{natural}}_{y-a+1}(\theta^\textrm{natural}) - \bar{z}^\textrm{natural}_{y-a+1}] h^2\right) +\\
@@ -94,57 +103,71 @@ where
   p^\textrm{HOB}_{y,a} = \dfrac{\textrm{Fec}^\textrm{brood}_a \times (\textrm{HOB}_{y,a} + \textrm{Brood}^\textrm{import}_{y,a})}{\sum_a\textrm{Fec}^\textrm{brood}_a(\textrm{NOB}_{y,a} + \textrm{HOB}_{y,a} + \textrm{Brood}^\textrm{import}_{y,a})}  (\#eq:MixedpHOB)\\
 \end{align}
 
-Effective proportions, i.e., weighting by age-class fecundity, accounts for older age classes that are more fecund and more likely to contribute to the production of next cohort.
+Effective proportions, i.e., weighting by age-class fecundity, accounts for older age classes that are more fecund and more likely to contribute to the production of the next cohort.
 
-### Fitness loss
+## Fitness loss
 
-Fitness can reduce survival in the egg, fry, and immature life stages.
+Fitness can reduce survival in the egg, fry, and juvenile marine life stages.
 
-If no habitat model is used, then the egg-fry survival is reduced by the fitness loss function:
+If a single egg-juvenile survival function is used, then the egg-juvenile survival is reduced by the fitness loss function over the egg and fry life stage.
+
+In the Ricker stock-recruit function, $\alpha$ and $\beta$ are modified as:
 
 \begin{align}
-  \textrm{Fry}^\textrm{NOS}_{y+1} &= \textrm{Egg}^\textrm{NOS}_y \times (W^\textrm{nat.}_y)^{\ell_\textrm{egg}}\\
-  \textrm{Fry}^\textrm{HOS}_{y+1} &= \textrm{Egg}^\textrm{HOS}_y \times (W^\textrm{nat.}_y)^{\ell_\textrm{egg}}
-   (\#eq:EggFryFitness)
+  \textrm{Smolt}^\textrm{NOS}_{y+1} &= \alpha'_{y+1} \times \textrm{Fry}^\textrm{NOS}_{y+1} \exp(-\beta'_{y+1}(\textrm{Fry}^\textrm{NOS}_{y+1} + \textrm{Fry}^\textrm{HOS}_{y+1}))\\
+  \textrm{Smolt}^\textrm{HOS}_{y+1} &= \alpha'_{y+1} \times \textrm{Fry}^\textrm{HOS}_{y+1} \exp(-\beta'_{y+1}(\textrm{Fry}^\textrm{NOS}_{y+1} + \textrm{Fry}^\textrm{HOS}_{y+1})
+  (\#eq:SmoltProdFitnessRicker)
 \end{align}
 
-and the smolt production function is adjusted by loss in productivity and capacity, with $\alpha$ and $\beta$ adjusted accordingly as:
+where
+
+\begin{align}
+  \alpha'_{y+1} &= (\bar{W}^\textrm{nat.}_y)^{\ell_\textrm{fry}}\times\kappa/\phi\\
+  \beta'_{y+1} &= 1/[S_\textrm{max} \dfrac{\phi}{\tau} (\bar{W}^\textrm{nat.}_y)^{\ell_\textrm{fry}}]\\
+  \textrm{Fry}^\textrm{NOS}_{y+1} &= \textrm{Egg}^\textrm{NOS}_y \times (\bar{W}^\textrm{nat.}_y)^{\ell_\textrm{egg}}\\
+  \textrm{Fry}^\textrm{HOS}_{y+1} &= \textrm{Egg}^\textrm{HOS}_y \times (\bar{W}^\textrm{nat.}_y)^{\ell_\textrm{egg}}
+  (\#eq:SmoltProdFitnessRicker2)
+\end{align}
+
+The loss parameter $\ell_j$, where $j \in \{\textrm{egg}, \textrm{fry}, \textrm{juv}\}$ and $\sum_j \ell_j = 1$, apportions mortality among different life stages due to lower population fitness (loss can be turned off if $\ell_j = 0$ for all $j$).
+
+With the Beverton-Holt function, $\alpha$ and $\beta$ are modified as: 
 
 \begin{align}
   \textrm{Smolt}^\textrm{NOS}_{y+1} &= \frac{\alpha'_{y+1} \times
-  \textrm{Fry}^\textrm{NOS}_{y+1}}{1 + \beta'_{y+1}(\textrm{Fry}^\textrm{NOS}_{y+1} + \textrm{Fry}^\textrm{HOS}_{y+1} + n^\textrm{sub}_{y+1})}\\
+  \textrm{Fry}^\textrm{NOS}_{y+1}}{1 + \beta'_{y+1}(\textrm{Fry}^\textrm{NOS}_{y+1} + \textrm{Fry}^\textrm{HOS}_{y+1})}\\
   \textrm{Smolt}^\textrm{HOS}_{y+1} &= \frac{\alpha'_{y+1} \times
-  \textrm{Fry}^\textrm{HOS}_{y+1}}{1 + \beta'_{y+1}(\textrm{Fry}^\textrm{NOS}_{y+1} + \textrm{Fry}^\textrm{HOS}_{y+1} + n^\textrm{sub}_{y+1})}\\
-  where \\
-   \alpha'_{y+1} = (W^\textrm{nat.}_y)^{\ell_\textrm{fry}}\times\kappa/\phi\\
-   and \\
-  \beta'_{y+1} = \alpha/(C_\textrm{egg-smolt} \times (W^\textrm{nat.}_y)^{\ell_\textrm{fry}})
-  (\#eq:SmoltProdFitness)
+  \textrm{Fry}^\textrm{HOS}_{y+1}}{1 + \beta'_{y+1}(\textrm{Fry}^\textrm{NOS}_{y+1} + \textrm{Fry}^\textrm{HOS}_{y+1})} (\#eq:SmoltProdFitnessBH)
 \end{align}
 
-With the Ricker density-dependent survival, the beta parameter is adjusted with:
+where
 
 \begin{equation}
-  \beta^*_y = 1/[S_\textrm{max} \times (W^\textrm{nat.}_y)^{\ell_\textrm{fry}}]
-   (\#eq:RickerBeta)
+  \beta'_{y+1} = \alpha/(C_\textrm{egg-smolt} \times (\bar{W}^\textrm{nat.}_y)^{\ell_\textrm{fry}})
+  (\#eq:SmoltProdFitnessBH2)
 \end{equation}
+
+and all other symbols are as defined in Equation \@ref(eq:SmoltProdFitnessRicker2).
+
+If stage-specific relationships are modeled, then the egg and fry fitness losses adjust the base productivity and capacity values in the corresponding life stage:
+
+\begin{align}
+  P^{'\textrm{egg-fry}}_y &= P^\textrm{egg-fry} \times (\bar{W}^\textrm{nat.}_y)^{\ell_\textrm{egg}}\\
+  P^{'\textrm{fry-smolt}}_y &= P^\textrm{fry-smolt} \times (\bar{W}^\textrm{nat.}_y)^{\ell_\textrm{fry}}\\
+  C^{'\textrm{egg-fry}}_y &= C^\textrm{egg-fry} \times (\bar{W}^\textrm{nat.}_y)^{\ell_\textrm{egg}}\\
+  C^{'\textrm{fry-smolt}}_y &= C^\textrm{fry-smolt} \times (\bar{W}^\textrm{nat.}_y)^{\ell_\textrm{fry}}\\
+  (\#eq:ProdAdjusted)
+\end{align}
+
 
 In the marine life stage, the increase in natural mortality is:
 
 \begin{equation}
-  M^\textrm{NOS}_{y,a} = -\log(\exp(-M^\textrm{base,NOS}_{y,a}) \times (W^\textrm{nat.}_{y-a})^{\ell_\textrm{juv}})
+  M^{'\textrm{NO}}_{y,a} = -\log\left(\exp(-M^\textrm{base,NO}_{y,a}) \times (\bar{W}^\textrm{nat.}_{y-a})^{\ell_\textrm{juv}}\right)
   (\#eq:MarineMortIncrease)
 \end{equation}
 
-In the marine environment, age-specific natural survival is reduced proportional to the fitness loss term and modeled as a cohort effect.
+In the marine environment, natural survival is reduced proportional to the fitness loss term and modeled as a cohort effect.
 
-Parameter $\ell_i$ is the proportion of the fitness loss apportioned to life stage $i$ (either egg, fry, or juvenile-marine), with $\sum_i \ell_i = 1$.
 
-If habitat variables are modeled, then the egg and fry fitness losses adjust the productivity and capacity of the corresponding life stage:
-
-\begin{align}
-  P^\textrm{egg-fry}_y &= P^\textrm{egg-fry} \times (W^\textrm{nat.}_y)^{\ell_\textrm{egg}}\\
-  P^\textrm{fry-smolt}_y &= P^\textrm{fry-smolt} \times (W^\textrm{nat.}_y)^{\ell_\textrm{fry}}
-  (\#eq:ProdAdjusted)
-\end{align}
 
