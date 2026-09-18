@@ -1,69 +1,78 @@
-Name,Definition,Type,Class,Slot
-\textrm{NOS},Natural origin spawners,Natural production,SMSE,NOS
-\textrm{HOS},Hatchery origin spawners,Hatchery,SMSE,HOS
-\textrm{HOS}_\textrm{eff},"Effective number of HOS, spawning output discounted by $\gamma$",Hatchery,SMSE,HOSeff
-\textrm{Fry}^\textrm{NOS},"Fry production by natural origin spawners",Natural production,SMSE,Fry_NOS
-\textrm{Fry}^\textrm{HOS},"Fry production by hatchery origin spawners",Hatchery,SMSE,Fry_HOS
-\textrm{Smolt}^\textrm{NOS},"Smolt production by natural origin spawners",Natural production,SMSE,Smolt_NOS
-\textrm{Smolt}^\textrm{HOS},"Smolt production by hatchery origin spawners",Hatchery,SMSE,Smolt_HOS
-C_\textrm{egg-smolt},Carrying capacity of smolts (Beverton-Holt stock-recruit parameter),Natural production,"SOM, Bio",capacity
-S_\textrm{max},Spawner abundance that maximizes smolt production (Ricker stock-recruit parameter),Natural production,"SOM, Bio",Smax
-\kappa,"Productivity (maximum recruitment production rate), units of recruit per spawner",Natural production,"SOM, Bio",kappa
-\phi,"Unfished per capita egg production rate, units of egg per smolt",Natural production,"SOM, Bio",phi
-\tau,"Unfished per capita spawners, units of spawner per smolt",Natural production,"SOM, Bio",tau
-r,"Maturity at age, i.e., recruitment rate",Natural production,"SOM, Bio",p_mature
-\textrm{Fec},Fecundity of spawners (eggs per female),Natural production,"SOM, Bio",fec
-\textrm{Fec}^\textrm{brood},Fecundity of broodtake (eggs per female),Hatchery,"SOM, Hatchery",fec_brood
-p^\textrm{female},Proportion of female spawners in the natural environment,Natural production,"SOM, Bio",p_female
-p^\textrm{female,brood},Proportion of female spawners in the hatchery,Hatchery,"SOM, Hatchery",p_female_brood
-\textrm{SAR},Smolt-to-adult recruit survival,Natural production,-,-
-M,"Juvenile instantaneous natural mortality (marine environment) by origin",Natural production + Hatchery,"SOM, Bio","Mjuv_NOS, Mjuv_HOS"
-s_\textrm{enroute},Survival of escapement to spawning grounds and hatchery,Natural production,"SOM, Bio",s_enroute
-P^\textrm{ps},Productivity for density-dependent survival: pre-spawn mortality,Habitat,SOM,prespawn_prod
-C^\textrm{ps},Capacity for density-dependent survival: pre-spawn mortality,Habitat,SOM,prespawn_capacity
-P^\textrm{inc},Productivity for density-dependent survival: egg incubation from spawning output,Habitat,SOM,egg_prod
-C^\textrm{inc},Capacity for density-dependent survival: egg incubation from spawning output,Habitat,SOM,egg_capacity
-P^\textrm{egg-fry},Productivity for density-dependent survival: egg emergence to fry life stage,Habitat,SOM,fry_prod
-C^\textrm{egg-fry},Capacity for density-dependent survival: egg emergence to fry life stage,Habitat,SOM,fry_capacity
-\varepsilon^\textrm{egg-fry}_y,Deviations in density-dependent survival: egg to fry life stage,Habitat,SOM,fry_sdev
-P^\textrm{fry-smolt},Productivity for density-dependent survival: fry to smolt life stage,Habitat,SOM,smolt_prod
-C^\textrm{fry-smolt},Capacity for density-dependent survival: fry to smolt life stage,Habitat,SOM,smolt_capacity
-\varepsilon^\textrm{fry-smolt}_y,Deviations in density-dependent survival: fry to smolt life stage,Habitat,SOM,smolt_sdev
-\textrm{NOB},Natural origin broodtake,Hatchery,SMSE,NOB
-\textrm{HOB},Hatchery origin broodtake,Hatchery,SMSE,HOB
-\textrm{Stray},External strays of hatchery origin fish,Hatchery,SOM,stray_external
-\textrm{HOB}_\textrm{stray},Broodtake from strays,Hatchery,SMSE,HOB_stray
-"\textrm{Brood}^\textrm{avail,import}",Available imported brood (considered 100% marked),Hatchery,SOM,brood_import
-\textrm{Brood}^\textrm{import},Realized imported fish used for brood (considered 100% marked),Hatchery,SMSE,HOB_import
-s_\textrm{yearling},Survival of hatchery eggs to yearling life stage,Hatchery,SOM,s_egg_smolt
-s_\textrm{subyearling},Survival of hatchery eggs to subyearling life stage,Hatchery,SOM,s_egg_subyearling
-p_\textrm{yearling},Proportion of hatchery releases as yearling (vs. subyearling),Hatchery,Internal state variable,-
-s_\textrm{prespawn},Survival of adult broodtake in hatchery,Hatchery,SOM,s_prespawn
-n_\textrm{yearling},Target number of hatchery releases as yearlings,Hatchery,SOM,n_yearling
-n_\textrm{subyearling},Target number of hatchery releases as subyearlings,Hatchery,SOM,n_subyearling
-m,Mark rate of hatchery-origin fish,Hatchery,SOM,m
-p^\textrm{esc}_\textrm{max},Maximum proportion of total escapement (after en-route mortality) to use as broodtake,Hatchery,SOM,pmax_esc
-p^\textrm{NOB}_\textrm{target},"Target proportion of the natural origin broodtake from the escapement (after en-route mortality), i.e., NOB/NOS ratio",Hatchery,SOM,ptarget_NOB
-p^\textrm{NOB}_\textrm{max},"Maximum proportion of the natural origin broodtake from the escapement (after en-route mortality), i.e., NOB/NOS ratio",Hatchery,SOM,pmax_NOB
-p_\textrm{NOB},Realized proportion of the total broodtake of hatchery origin (vs. natural origin),Hatchery,SMSE,pNOB
-\textrm{NOR},Natural origin return,Natural production,SMSE,Return_NOS
-\textrm{HOR},Hatchery origin return,Hatchery,SMSE,Return_HOS
-p^\textrm{hatchery},"Proportion of hatchery origin escapement returning to hatchery, available for broodtake",Hatchery,SOM,phatchery
-p^\textrm{HOS}_\textrm{removal},"Proportion of hatchery origin fish removed from spawning grounds, not available for broodtake",Hatchery,SOM,premove_HOS
-p^\textrm{NOS}_\textrm{removal},"Proportion of natural origin fish removed from spawning grounds, not available for broodtake",Hatchery,SOM,premove_NOS
-\gamma,Reduced reproductive success of HOS,Hatchery,SOM,gamma
-\bar{z},Mean phenotypic value of cohort in natural and hatchery environments,Fitness,Internal state variable and SOM,zbar_start
-\theta,Optimal phenotypic value for natural and hatchery environments,Fitness,SOM,theta
-\sigma^2,Variance of phenotypic traits in population,Fitness,SOM,phenotype_variance
-\omega^2,Variance of fitness function,Fitness,SOM,fitness_variance
-h^2,Heritability of phenotypic traits,Fitness,SOM,heritability
-\bar{W},Population fitness in the natural and hatchery environments,Fitness,SMSE,fitness
-\ell_i,"Relative fitness loss at the life stage i (egg, fry, smolt)",Fitness,SOM,rel_loss
-\textrm{PNI},Proportionate natural influence,Fitness,SMSE,PNI
-p_\textrm{HOSeff},Proportion of effective hatchery origin spawners (vs. NOS),Hatchery,SMSE,pHOS_effective
-p_\textrm{HOScensus},Proportion of hatchery origin spawners (vs. NOS),Hatchery,SMSE,pHOS_census
-u^\textrm{PT},Pre-terminal fishery harvest rate (adjusted for adult equivalents),Harvest,SOM,u_preterminal
-u^\textrm{T},Terminal fishery harvest rate,Harvest,SOM,u_terminal
-\delta,Mortality from catch and release (proportion),Harvest,SOM,release_mort
-v,Relative vulnerability by age to the fishery,Harvest,SOM,"vulPT, vulT"
-p^\textrm{WILD},Proportion of wild spawners,Hatchery,SMSE,p_wild
+Entry,Name,Definition,Type_Internal,Type,Slot
+aeq,\textrm{AEQ},Adult equivalent (discounts juvenile catch),Internal variable,Internal variable,N/A
+alpha,\alpha,Maximum egg-smolt survival,Internal variable,Internal variable,N/A
+beta,\beta,Parameter controlling density-dependent egg-smolt survival,Internal variable,Internal variable,N/A
+broodavail,"\textrm{Brood}^\textrm{avail,import}",Available imported brood,Input,Input,SOM@Hatchery@brood_import
+broodimport,\textrm{Brood}^\textrm{import},Realized imported fish used for brood,Output,Output,SMSE@HOB_import
+capacity,C_\textrm{egg-smolt},Carrying capacity of smolts (Beverton-Holt stock-recruit parameter),Input,Input,SOM@Bio@capacity
+capacity1prespawn,C^\textrm{ps},Capacity for density-dependent survival: pre-spawn mortality,Input,Input,SOM@Habitat@prespawn_capacity
+capacity2eggincubation,C^\textrm{inc},Capacity for density-dependent survival: egg incubation mortality,Input,Input,SOM@Habitat@egg_capacity
+capacity3fry,C^\textrm{egg-fry},Capacity for density-dependent survival: egg emergence to fry life stage,Input,Input,SOM@Habiat@fry_capacity
+capacity4smolt,C^\textrm{fry-smolt},Capacity for density-dependent survival: fry to smolt life stage,Input,Input,SOM@Habitat@smolt_capacity
+delta,\delta,Mortality from catch and release (proportion),Input,Input,SOM@Harvest@release_mort
+e,E,Escapement from marine fisheries,Output,Output,"SMSE@Escapement_NOS, SMSE@Escapement_HOS"
+epsilon1fry,\varepsilon^\textrm{egg-fry}_y,Deviations in density-dependent survival: egg to fry life stage,Input,Input,SOM@Habitat@fry_sdev
+epsilon2smolt,\varepsilon^\textrm{fry-smolt}_y,Deviations in density-dependent survival: fry to smolt life stage,Input,Input,SOM@Habitat@smolt_sdev
+f,F,Instantaneous fishing mortality rate (measure of fishing effort),Internal variable,Internal variable,N/A
+fecundity,\textrm{Fec},Fecundity of spawners (eggs per female),Input,Input,SOM@Bio@fec
+fecunditybrood,\textrm{Fec}^\textrm{brood},Fecundity of broodtake (eggs per female),Input,Input,SOM@Hatchery@fec_brood
+fryhos,\textrm{Fry}^\textrm{HOS},Fry production by hatchery-origin spawners,Output,Output,SMSE@Fry_HOS
+frynos,\textrm{Fry}^\textrm{NOS},Fry production by natural-origin spawners,Output,Output,SMSE@Fry_NOS
+gamma,\gamma,Reduced reproductive success of HOS,Fitness,Input,SOM@Hatchery@gamma
+h,h^2,Heritability of phenotypic traits,Fitness,Input,SOM@Hatchery@heritability
+hob,\textrm{HOB},Hatchery-origin brood,Output,Output,SMSE@HOB
+hobstray,\textrm{HOB}_\textrm{stray},Brood from strays,Output,Output,SMSE@HOB_stray
+hos,\textrm{HOS},Hatchery-origin spawners,Output,Output,SMSE@HOS
+hoseff,\textrm{HOS}_\textrm{eff},Hatchery-origin spawners (spawning output discounted),Output,Output,SMSE@HOSeff
+irc,\textrm{IRC},"In-river catch after brood, before spawning",Internal variable,Internal variable,N/A
+kappa,\kappa,"Productivity (maximum recruitment production rate), units of recruits per spawner",Input,Input,SOM@Bio@kappa
+kho,K^\textrm{HO},Kept catch of hatchery-origin fish,Output,Output,"SMSE@KPT_HOS, SMSE@KT_HOS"
+kno,K^\textrm{NO},Kept catch of natural-origin fish,Output,Output,"SMSE@KPT_NOS, SMSE@KT_NOS"
+l,\ell_i,"Relative fitness loss at the life stage i (egg, fry, smolt)",Input,Input,SOM@Hatchery@rel_loss
+m,M,Juvenile instantaneous natural mortality (marine environment),Input,Input,"SOM@Bio@Mjuv_NOS, SOM@Hatchery@Mjuv_HOS"
+m,m,Mark rate of hatchery-origin fish,Input,Input,SOM@Hatchery@m
+njuv,N^\textrm{juv},Juvenile abundance,Output,Output,"SMSE@Njuv_NOS, SMSE@Njuv_HOS"
+nob,\textrm{NOB},Natural-origin brood,Output,Output,SMSE@NOB
+nos,\textrm{NOS},Natural-origin spawners,Output,Output,SMSE@NOS
+nsubyearling,n_\textrm{subyearling},Target number of hatchery releases as subyearlings,Input,Input,SOM@Hatchery@n_subyearling
+nyearling,n_\textrm{yearling},Target number of hatchery releases as yearlings,Input,Input,SOM@Hatchery@n_yearling
+omega,\omega^2,Variance of fitness function,Fitness,Input,SOM@Hatchery@fitness_variance
+pbroodtake,p^\textrm{broodtake},Proportion of in-river return used as brood,Internal variable,Internal variable,N/A
+peggfry,P^\textrm{egg-fry},Productivity for density-dependent survival: egg emergence to fry life stage,Input,Input,SOM@Habitat@fry_prod
+pfemale,p^\textrm{female},Proportion of female spawners in the natural environment,Input,Input,SOM@Bio@p_female
+pfemalebrood,"p^\textrm{female,brood}",Proportion of female spawners in the hatchery,Input,Input,SOM@Hatchery@p_female_brood
+pfrysmolt,P^\textrm{fry-smolt},Productivity for density-dependent survival: fry to smolt life stage,Input,Input,SOM@Habitat@smolt_prod
+phatchery,p^\textrm{hatchery},"Proportion of hatchery-origin escapement returning to hatchery, available for brood",Input,Input,SOM@Hatchery@phatchery
+phi,\phi,"Per capita egg production rate at replacement, units of egg per smolt",Input,Input,SOM@Bio@phi
+phoscensus,\textrm{pHOS},Proportion of spawners that are hatchery-origin,Output,Output,SMSE@pHOS_census
+phoseff,\textrm{pHOSeff},Proportion of spawners that are hatchery-origin (discounted),Output,Output,SMSE@pHOS_effective
+pincubation,P^\textrm{inc},Productivity for density-dependent survival: egg incubation mortality,Input,Input,SOM@Habitat@egg_prod
+pircho,"p^\textrm{IRC,HO}","Proportion of hatchery-origin fish removed from spawning grounds, not for brood",Input,Input,SOM@Hatchery@premove_HOS
+pircno,"p^\textrm{IRC,NO}","Proportion of natural-origin fish removed from spawning grounds, not for brood",Input,Input,SOM@Hatchery@premove_NOS
+pmaxesc,p^\textrm{esc}_\textrm{max},Maximum proportion of total escapement (after en-route mortality) to use as brood,Input,Input,SOM@Hatchery@pmax_esc
+pni,\textrm{PNI},Proportionate natural influence,Output,Output,SMSE@PNI
+pnob,\textrm{pNOB},Realized proportion of brood that is natural-origin,Output,Output,SMSE@pNOB
+pnobmax,p^\textrm{NOB}_\textrm{max},Maximum allowable proportion of natural-origin escapement (after en-route mortality) used as brood,Input,Input,SOM@pmax_NOB
+pnobtarget,p^\textrm{NOB}_\textrm{target},Target proportion of brood that is natural-origin,Input,Input,SOM@ptarget_NOB
+pprespawn,P^\textrm{ps},Productivity for density-dependent survival: pre-spawn mortality,Input,Input,SOM@Habitat@prespawn_prod
+pwild,p^\textrm{WILD},Proportion of wild spawners,Output,Output,SMSE@p_wild
+pyearling,p_\textrm{yearling},Proportion of hatchery releases as yearling (vs. subyearling),Internal variable,Internal variable,N/A
+r,r,Proportion mature at age,Input,Input,"SOM@Bio@p_mature, SOM@Hatchery@p_mature_HOS"
+r,R,Return,Output,Output,"SMSE@Return_NOS, SMSE@Return_HOS"
+senroute,s_\textrm{enroute},Survival of escapement to spawning grounds and hatchery,Input,Input,SOM@Bio@s_enroute
+sigma,\sigma^2,Variance of phenotypic traits in population,Fitness,Input,SOM@Hatchery@phenotype_variance
+smax,S_\textrm{max},Spawner abundance that maximizes recruitment (Ricker stock-recruit parameter),Input,Input,SOM@Bio@Smax
+smolthos,\textrm{Smolt}^\textrm{HOS},Natural smolt production by hatchery-origin spawners,Output,Output,SMSE@Smolt_HOS
+smoltnos,\textrm{Smolt}^\textrm{NOS},Natural smolt production by natural-origin spawners,Output,Output,SMSE@Smolt_NOS
+sprespawn,s_\textrm{prespawn},Survival of adult brood in hatchery,Input,Input,SOM@Hatchery@s_prespawn
+ssubyearling,s_\textrm{subyearling},Survival of hatchery eggs to subyearling life stage,Input,Input,SOM@Hatchery@s_egg_subyearling
+stray,\textrm{Stray},Strays of hatchery-origin fish,Input,Input,SOM@Hatchery@stray_external
+syearling,s_\textrm{yearling},Survival of hatchery eggs to yearling life stage,Input,Input,SOM@Hatchery@s_egg_smolt
+tau,\tau,"Per capita spawners at replacement, units of spawner per smolt",Input,Input,SOM@Bio@tau
+theta,\theta,Optimal phenotypic value for natural and hatchery environments,Fitness,Input,SOM@Hatchery@theta
+u,u,Fishery harvest rate (kept catch),Input,Input,"SOM@Harvest@u_preterminal, SOM@Harvest@u_terminal"
+uho,U^\textrm{HO},Fishery exploitation rate (kept catch and dead releases) of hatchery-origin fish,Output,Output,"SMSE@ExPT_HOS, SMSE@ExT_HOS"
+uno,U^\textrm{NO},Fishery exploitation rate (kept catch and dead releases) of natural-origin fish,Output,Output,"SMSE@ExPT_NOS, SMSE@ExT_NOS"
+v,v,Vulnerability by age to the fishery,Input,Input,"SOM@Harvest@vulPT, SOM@Harvest@vulT"
+wbar,\bar{W},Population fitness in the natural and hatchery environments,Fitness,Output,SMSE@fitness
+zbar,\bar{z},Mean phenotypic value of cohort in natural and hatchery environments,Internal variable,Internal variable,N/A

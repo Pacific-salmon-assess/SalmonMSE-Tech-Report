@@ -19,7 +19,7 @@ salmonMSE can be used to address questions such as:
 - How do changes in environmental drivers impact ability to rebuild populations?
 - What combination of fishery exploitation rates and hatchery production targets meets spawner abundance objectives?
 
-# Dynamics equations
+# Structure of document
 
 This document is intended to be summary of the age-structured projection model in salmonMSE.
 The model is stochastic, and users have full control of stochastic, time-varying parameters.
@@ -35,8 +35,33 @@ The equations are structured in the following order:
 - Survival to outmigrating juveniles of the next generation in the next time step
 - Advancement of age classes of juveniles that did not mature in the previous time step
 
+A glossary of important state variables is provided in Table \@ref(tab:glossary). 
+
+Appendices describe various modifications to the system dynamics including mark-selective fishing (Appendix \@ref(app:msf)), fitness impacts on juvenile survival from genetic drift due to selection against hatchery traits in the natural environment (Appendix \@ref(app:fitness)), and multi-population models (Appendix \@ref(app:multi)).
+
+\newpage
+
+```{r glossary, results="asis"}
+glossary <- readr::read_csv("tables/glossary.csv") %>%
+  filter(Type_Internal != "Fitness") %>%
+  arrange(Entry) %>%
+  select(Name, Definition, Type, Slot)
+
+flextable(glossary) %>%
+  compose(j = "Name", value = as_paragraph(as_equation(Name))) %>%
+  valign(j = 1:4, valign = "top", part = "all") %>%
+  #align(j = 1:4, align = "left", part = "all") %>%
+  set_table_properties(layout = "autofit") %>%
+  set_caption("Glossary of state variables used in the dynamics equations and their relation to the R code, either as user inputs, internal variables (not reported to user), or reported outputs. Inputs are stored in an S4 object of class SOM and outputs are reported in an S4 object of class SMSE. The table reports the corresponding slots for the state variables in the S4 objects.")
+```
+
+\newpage
+
+## Source code
+
 The corresponding R code is available on Github at [https://github.com/Blue-Matter/salmonMSE](https://github.com/Blue-Matter/salmonMSE).
 `ProjectSOM()` is the primary function that executes the projection and calls subsidiary functions that implement different components of the simulation (Table \@ref(tab:equation-table)).
+
 
 ```{r equation-table, results="asis"} 
 #Equations <- read.csv("tables/EquationTable.csv")
