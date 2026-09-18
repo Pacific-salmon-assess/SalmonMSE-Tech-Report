@@ -5,39 +5,42 @@ french_title: |
   Un Bon Model: salmonMSE
 
 author: |
-  Brooke M. Davis^1^,
+  Quang Huynh^1^,
   Carrie A. Holt^2^,
-  Quang Huynh^3^
+  Anna Potapova^3^,
+  Brooke M. Davis^3^
 
 english_address: |
-  ^1^ Lower Fraser Area Office\
-  Fisheries and Oceans Canada\
-  3-100 Annacis Parkway,\
-  Delta, British Columbia, V3M 6A2, Canada\
+  ^1^Blue Matter Science\
+     2150 Bridgeman Ave\
+     North Vancouver, British Columbia, V7P 2T9, Canada\
   \
   ^2^Pacific Biological Station\
      Fisheries and Oceans Canada\
      3190 Hammond Bay Road\
      Nanaimo, British Columbia, V9T 6N7, Canada\
   \
-  ^3^Blue Matter Science\
-     2150 Bridgeman Ave\
-     North Vancouver, British Columbia, V7P 2T9, Canada\
+  ^3^ Lower Fraser Area Office\
+  Fisheries and Oceans Canada\
+  3-100 Annacis Parkway,\
+  Delta, British Columbia, V3M 6A2, Canada\
+
 
 french_address: |
- ^1^ Lower Fraser Area Office\
-  Pêches et Océans Canada\
-  3-100 promenade Annacis,\
-  Delta, Colombie-Britannique, V3M 6A2, Canada\
+  ^1^Blue Matter Science\
+     2150 Bridgeman Ave\
+     North Vancouver, Colombie-Britannique, V7P 2T9, Canada\
   \
   ^2^Station biologique du Pacifique\
      Pêches et Océans Canada\
      3190 Hammond Bay Road\
      Nanaimo, Colombie-Britannique, V9T 6N7, Canada\
   \
-  ^3^Blue Matter Science\
-     2150 Bridgeman Ave\
-     North Vancouver, Colombie-Britannique, V7P 2T9, Canada\
+  ^3^ Lower Fraser Area Office\
+  Pêches et Océans Canada\
+  3-100 promenade Annacis,\
+  Delta, Colombie-Britannique, V3M 6A2, Canada\
+  
 
 english_region: "Pacific Region"
 french_region: "Région du Pacifique"
