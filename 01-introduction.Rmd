@@ -19,7 +19,7 @@ salmonMSE can be used to address questions such as:
 - How do changes in environmental drivers impact ability to rebuild populations?
 - What combination of fishery exploitation rates and hatchery production targets meets spawner abundance objectives?
 
-# Structure of document
+## Structure of document
 
 This document is intended to be summary of the age-structured projection model in salmonMSE.
 The model is stochastic, and users have full control of stochastic, time-varying parameters.
@@ -39,6 +39,42 @@ A glossary of important state variables is provided in Table \@ref(tab:glossary)
 
 Appendices describe various modifications to the system dynamics including mark-selective fishing (Appendix \@ref(app:msf)), fitness impacts on juvenile survival from genetic drift due to selection against hatchery traits in the natural environment (Appendix \@ref(app:fitness)), and multi-population models (Appendix \@ref(app:multi)).
 
+## Source code
+
+The corresponding R code is available on Github at [https://github.com/Blue-Matter/salmonMSE](https://github.com/Blue-Matter/salmonMSE).
+`ProjectSOM()` is the primary function that executes the projection and calls subsidiary functions that implement different components of the simulation (Table \@ref(tab:equation-table)).
+
+## Basic inputs and outputs
+
+Users specify the parameters of the simulation through an S4 object of class `SOM`, which in itself is comprised of smaller S4 objects (class Bio, Habitat, Hatchery, or Harvest) that organize the biological dynamics and management levers:
+
+```{r, eval=FALSE, echo=TRUE}
+Bio <- new("Bio")
+SOM <- new(
+  "SOM",
+  Bio,
+  Habitat,
+  Hatchery,
+  Harvest
+)
+```
+
+The simulation of the projection model is run with a call to the `salmonMSE()` function:
+
+```{r, eval=FALSE, echo=TRUE}
+SMSE <- salmonMSE(SOM)
+```
+
+The output is another S4 object, class SMSE, that reports the results to the projection.
+The contents of S4 objects can be assigned or extracted  with the "@" symbol, for example:
+
+```{r, eval=FALSE, echo=TRUE}
+Bio@kappa <- 3
+SMSE@NOS
+```
+
+Table \@ref(tab:glossary) summarizes the important parameters and state variables described in this document, and where they can be assigned from the input or extracted from the output.
+
 \newpage
 
 ```{r glossary, results="asis"}
@@ -56,12 +92,6 @@ flextable(glossary) %>%
 ```
 
 \newpage
-
-## Source code
-
-The corresponding R code is available on Github at [https://github.com/Blue-Matter/salmonMSE](https://github.com/Blue-Matter/salmonMSE).
-`ProjectSOM()` is the primary function that executes the projection and calls subsidiary functions that implement different components of the simulation (Table \@ref(tab:equation-table)).
-
 
 ```{r equation-table, results="asis"} 
 #Equations <- read.csv("tables/EquationTable.csv")
