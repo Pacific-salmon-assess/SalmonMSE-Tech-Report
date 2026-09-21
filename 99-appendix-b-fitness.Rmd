@@ -7,7 +7,21 @@ Reproductive success of first generation hatchery-origin fish has been observed 
 Through genetic and epigenetic factors, survival of juveniles in the hatchery environment selects for fish with a phenotype best adapted for that environment, and likewise for juveniles spawned in the natural environment.
 Since these traits are heritable, the fitness of the natural population can shift away from the optimum for the natural environment towards that of the hatchery environment on an evolutionary time scale, i.e., over a number of generations, when hatchery-origin fish spawn in the natural environment.
 
-This appendix describes the fitness of the population as hatchery-origin fish spawn in the natural environment.
+This appendix describes the fitness of the population as hatchery-origin fish spawn in the natural environment, with parameters summarized in Table \@ref(tab:glossary-fitness).
+
+```{r glossary-fitness, results="asis"}
+glossary_fitness <- readr::read_csv("tables/glossary.csv") %>%
+  filter(Type_Internal == "Fitness") %>%
+  arrange(Entry) %>%
+  select(Name, Definition, Type, Slot)
+
+flextable(glossary_fitness) %>%
+  flextable::compose(j = "Name", value = as_paragraph(as_equation(Name))) %>%
+  valign(j = 1:4, valign = "top", part = "all") %>%
+  #align(j = 1:4, align = "left", part = "all") %>%
+  set_table_properties(layout = "autofit") %>%
+  set_caption("Glossary of additional variables associated with fitness.")
+```
 
 ## Derivation of population fitness
 
@@ -20,7 +34,7 @@ As described in @ford2002 and derived in @lande1976, the fitness loss function $
 
 where $\theta$ is the optimum for that environment and $\omega^2$ is the fitness variance.
 
-If the phenotypic trait value $z$ in the population is a random normal variable with mean $\bar{z}$ and variance $\sigma^2$, then the mean fitness of the population in generation $g$ is $\bar{W}(z) = \int W(z) f(z) dz$, where $f(z)$ is the Gaussian probability density function. The solution is proportional to:
+If the phenotypic trait value $z$ in the population is a random normal variable with mean $\bar{z}$ and variance $\sigma^2$, then the mean fitness of the population in generation $g$ is $\bar{W}(z) = \int W(z) f(z) dz$, where $f(z) = (\sqrt{2\pi}\sigma)^{-1}\exp(-0.5(z-\bar{z})^2/\sigma^2)$ is the Gaussian probability density function. The solution is proportional to:
 
 \begin{equation}
   \bar{W}(z) \propto \exp\left(\dfrac{-(\bar{z}-\theta)^2}{2(\omega^2+\sigma^2)}\right)
@@ -168,6 +182,5 @@ In the marine life stage, the increase in natural mortality is:
 \end{equation}
 
 In the marine environment, natural survival is reduced proportional to the fitness loss term and modeled as a cohort effect.
-
 
 

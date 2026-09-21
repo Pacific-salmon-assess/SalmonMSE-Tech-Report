@@ -18,7 +18,7 @@ fecundity,\textrm{Fec},Fecundity of spawners (eggs per female),Input,Input,SOM@B
 fecunditybrood,\textrm{Fec}^\textrm{brood},Fecundity of broodtake (eggs per female),Input,Input,SOM@Hatchery@fec_brood
 fryhos,\textrm{Fry}^\textrm{HOS},Fry production by hatchery-origin spawners,Output,Output,SMSE@Fry_HOS
 frynos,\textrm{Fry}^\textrm{NOS},Fry production by natural-origin spawners,Output,Output,SMSE@Fry_NOS
-gamma,\gamma,Reduced reproductive success of HOS,Fitness,Input,SOM@Hatchery@gamma
+gamma,\gamma,Reduced reproductive success of HOS,Input,Input,SOM@Hatchery@gamma
 h,h^2,Heritability of phenotypic traits,Fitness,Input,SOM@Hatchery@heritability
 hob,\textrm{HOB},Hatchery-origin brood,Output,Output,SMSE@HOB
 hobstray,\textrm{HOB}_\textrm{stray},Brood from strays,Output,Output,SMSE@HOB_stray
@@ -75,4 +75,4 @@ uho,U^\textrm{HO},Fishery exploitation rate (kept catch and dead releases) of ha
 uno,U^\textrm{NO},Fishery exploitation rate (kept catch and dead releases) of natural-origin fish,Output,Output,"SMSE@ExPT_NOS, SMSE@ExT_NOS"
 v,v,Vulnerability by age to the fishery,Input,Input,"SOM@Harvest@vulPT, SOM@Harvest@vulT"
 wbar,\bar{W},Population fitness in the natural and hatchery environments,Fitness,Output,SMSE@fitness
-zbar,\bar{z},Mean phenotypic value of cohort in natural and hatchery environments,Internal variable,Internal variable,N/A
+zbar,\bar{z},Mean phenotypic value of cohort in natural and hatchery environments,Fitness,Internal variable,N/A
