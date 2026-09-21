@@ -5,7 +5,7 @@ french_title: |
   Un Bon Model: salmonMSE
 
 author: |
-  Quang Huynh^1^,
+  Quang C. Huynh^1^,
   Carrie A. Holt^2^,
   Anna Potapova^3^,
   Brooke M. Davis^3^
