@@ -1,0 +1,78 @@
+\newpage
+
+# APPENDIX `r new_appendix()`. MULTI-POPULATION MODELS {#app:multi}
+
+salmonMSE has the capability for multi-population models, which concurrently project distinct biological units that spawn and reproduce separately. 
+
+There are currently two potential use cases for multi-population models to evaluate 
+1. Straying
+2. Mixed-stock fisheries
+
+## Straying
+
+First, multi-population models are used to evaluate hatchery production and stray rates on multiple river systems. For example, large hatcheries can generate a significant number of strays in smaller or un-enhanced population units. The hatchery influence can be high in small systems due to large hatchery production in an adjacent population. One can evaluate whether hatchery production levels would compromise the natural characteristics of nearby systems, e.g., a reduction in PNI even in the absence of hatchery production (see Equation \@ref(eq:AllImportPNI) in the main text).
+
+For recipient population $s'$, the number of strays age $a$ in year $y$ is the sum of contributions from donor populations $s$:
+
+\begin{equation}
+\textrm{Stray}_{y,a,s'} = \sum_{s\neq s'}\widetilde{E}^\textrm{HO}_{y,a,s}\times p^\textrm{stray}_{s,s'}
+(\#eq:Stray)
+\end{equation}
+
+where $\widetilde{E}^\textrm{HO}$ is the hatchery-origin escapement immediately after surviving the terminal fishery and $p^\textrm{stray}_{s,s'}$ is a $s \times s'$ square matrix with $\sum_{'s} p^\textrm{stray}_{s,s'} = 1$.
+Note when $s=s'$, $p^\textrm{stray}_{s',s'}$ is probability of not straying and is not used in Equation \@ref(eq:Stray).
+
+The hatchery-origin escapement $E$ is the local return that survived the terminal fishery reduced by departing strays, plus incoming strays:
+
+\begin{equation}
+E^\textrm{HO}_{y,a,s'} = \widetilde{E}^\textrm{HO}_{y,a,s'} \times p^\textrm{stray}_{s',s'} - \sum_{s\neq s'} \widetilde{E}^\textrm{HO}_{y,a,s}\times p^\textrm{stray}_{s,s'}
+(\#eq:MultiPopEscapement)
+\end{equation}
+
+Equation \@ref(eq:Stray) informs Equations \@ref(eq:BroodtakeImportStray), \@ref(eq:HOS1), \@ref(eq:HOS2) in the main text regarding hatchery-origin brood and hatchery-origin spawners.
+Equation \@ref(eq:MultiPopEscapement) updates Equation \@ref(eq:Escapement) in the main text regarding hatchery-origin escapement.
+
+## Multi-stock fisheries
+
+Many salmon fisheries are mixed-stock and catch distinct populations that vary in productivity. 
+One can evaluate the performance of harvest strategies for a single mixed-stock fishery for outcomes across individual population units. 
+For example, smaller or less productive biological units may be choke points and there are objectives to ensure the sustainability of small or less productive population units.
+What harvest rates aggregated over the fishery unit can ensure the sustainability of a low productivity population unit?
+
+Mixed-stock fisheries are possible for either the preterminal or terminal fishery:
+
+From a specified harvest rate $u^\textrm{PT}_y$, the instantaneous fishing mortality rate $F^\textrm{PT}_y$ (related to fishing intensity of the preterminal fishery) is solved such that:
+
+$$
+u^\textrm{PT}_y = \frac{\sum_a\sum_s(K^\textrm{NO,PT}_{y,a,s} + K^\textrm{HO,PT}_{y,a,s})\times \textrm{AEQ}_{a,s}}{\sum_a\sum_s\left((K^\textrm{NO,PT}_{y,a,s} + K^\textrm{HO,PT}_{y,a,s}) \times \textrm{AEQ}_{a,s} + (N^\textrm{juv,NO}_{y,a,s} + N^\textrm{juv,HO}_{y,a,s})\exp(-v^\textrm{PT}_{a,s} F^\textrm{PT}_y)\times r_{a,s})\right)}
+(\#eq:PTFMultiPop)
+$$
+
+where
+
+\begin{align}
+K^\textrm{NO,PT}_{y,a,s} &= \left(1 - \exp(-v^\textrm{PT}_{a,s} F^\textrm{PT}_y)\right)N^\textrm{juv,NO}_{y,a,s}\\
+K^\textrm{HO,PT}_{y,a,s} &= \left(1 - \exp(-v^\textrm{PT}_{a,s} F^\textrm{PT}_y)\right)N^\textrm{juv,HO}_{y,a,s}
+(\#eq:PTKeptCatchMultiPop)
+\end{align}
+
+Similarly, from a specified harvest rate of the terminal fishery $u^\textrm{T}_y$, the corresponding instantaneous fishing mortality rate $F^\textrm{T}_y$ satisfies:
+
+\begin{equation}
+u^\textrm{T}_y = \frac{\sum_a(K^\textrm{NO,T}_{y,a,s} + K^\textrm{HO,T}_{y,a,s})}{\sum_a(R^\textrm{NO}_{y,a,s} + R^\textrm{HO}_{y,a,s})}
+(\#eq:TFMultiPop)
+\end{equation}
+
+where
+
+\begin{align}
+  K^\textrm{NO,T}_{y,a,s} &= \left(1 - \exp(-v^\textrm{T}_{a,s} F^\textrm{T}_y)\right)R^\textrm{NO}_{y,a,s}\\
+  K^\textrm{HO,T}_{y,a,s} &= \left(1 - \exp(-v^\textrm{T}_{a,s} F^\textrm{T}_y)\right)R^\textrm{HO}_{y,a,s}
+  (\#eq:TermCatchMultiPop)
+\end{align}
+
+All variables are identical as in main text except with an additional subscript $s$ pertaining to the abundance, catch, maturity, and vulnerability of population $s$. 
+
+Fishing intensity is independent of population, but one unit of fishing effort may catch one population more effectively than others through the vulnerability parameter $v$.
+For example, the spatial location and timing of the fishery leads to higher availability for Population 1 compared to Population 2. Population 1 should have a higher vulnerability.
+

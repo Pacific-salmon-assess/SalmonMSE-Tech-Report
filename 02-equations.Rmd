@@ -18,9 +18,10 @@ where $v$ is vulnerability at age and $F$ is instantaneous fishing mortality.
 
 If management is by target harvest rate, then the specified harvest rate $u^\textrm{PT}_y$ in the pre-terminal fishery is used to calculate $F^\textrm{PT}_y$ such that:
 
-$$
+\begin{equation}
 u^\textrm{PT}_y = \frac{\sum_a(K^\textrm{NO,PT}_{y,a} + K^\textrm{HO,PT}_{y,a})\times \textrm{AEQ}_a}{\sum_a\left((K^\textrm{NO,PT}_{y,a} + K^\textrm{HO,PT}_{y,a}) \times \textrm{AEQ}_a + (N^\textrm{juv,NO}_{y,a} + N^\textrm{juv,HO}_{y,a})\exp(-v^\textrm{PT}_a F^\textrm{PT}_y)\times r_a)\right)}
-$$
+(\#eq:PTF)
+\end{equation}
 
 To facilitate comparison of juvenile catch to adult catch, adult equivalents (AEQ) discount the juvenile catch by how many would have survived to adulthood had it not been caught (through maturity $r$ and natural mortality $M$):
 
@@ -49,6 +50,7 @@ $$
 where $m$ is the mark rate.
 
 Alternative equations are used if mark-selective fishing is implemented (Appendix \@ref(app:msf)).
+Modifications for mixed-stock fisheries are described in Appendix \@ref(app:multi).
 
 ## Advance age classes
 
@@ -76,15 +78,16 @@ Assuming no mark-selective fishing, the retained catch of the terminal ($\textrm
 
 \begin{align}
   K^\textrm{NO,T}_{y,a} &= \left(1 - \exp(-v^\textrm{T}_a F^\textrm{T}_y)\right)R^\textrm{NO}_{y,a}\\
-  K^\textrm{HO,T}_{y,a} &= \left(1 - \exp(-v^\textrm{T}_a F^\textrm{T}_y)\right)R^\textrm{HO}_{y,a}\\
+  K^\textrm{HO,T}_{y,a} &= \left(1 - \exp(-v^\textrm{T}_a F^\textrm{T}_y)\right)R^\textrm{HO}_{y,a}
   (\#eq:TermCatch)
 \end{align}
 
 If management is by target harvest rate, then the specified harvest rate $u^\textrm{T}_y$ is used to calculate instantaneous fishing mortality $F^\textrm{T}$, where
 
-$$
+\begin{equation}
 u^\textrm{T}_y = \frac{\sum_a(K^\textrm{NO,T}_{y,a} + K^\textrm{HO,T}_{y,a})}{\sum_a(R^\textrm{NO}_{y,a} + R^\textrm{HO}_{y,a})}
-$$
+(\#eq:TF)
+\end{equation}
 
 If management is by target catch $K^\textrm{T,target}_y$, then the fishing mortality is solved such that
 
@@ -102,6 +105,7 @@ $$
 where $m$ is the mark rate.
 
 Alternative equations are used if mark-selective fishing is implemented (Appendix \@ref(app:msf)).
+Modifications for mixed-stock fisheries are described in Appendix \@ref(app:multi).
 
 # Escapement
 
@@ -197,6 +201,7 @@ In either scenario for hatchery-origin brood, imported brood and strays may also
 \end{align}
 
 Annual strays and imported available brood are specified by the user.
+In multi-population models, annual strays can be a state variable derived by stray rates and hatchery production in other systems (Appendix \@ref(app:multi)).
 
 The proportions $p^\textrm{broodtake,unmarked}_y$ and $p^\textrm{broodtake,marked}_y$ specify the proportion of unmarked and marked fish used as brood.
 They are solved annually to satisfy the following conditions:

@@ -4,5 +4,6 @@ rmd_files: ["index.Rmd",
             "02-equations.Rmd",
             "98-references.Rmd",
             "99-appendix-a-msf.Rmd",
-            "99-appendix-b-fitness.Rmd"]
+            "99-appendix-b-fitness.Rmd",
+            "99-appendix-c-multi.Rmd"]
 delete_merged_file: true
