@@ -1,6 +1,6 @@
 ---
 english_title: |
-  A model for management strategy evaluation for Pacific salmon: salmonMSE
+  salmonMSE: management strategy evaluation for Pacific salmon for habitat, harvest, and hatchery management levers
 french_title: |
   Un Bon Model: salmonMSE
 
