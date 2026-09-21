@@ -519,3 +519,77 @@ $$
 
 The projection continues in the next year $y+1$ by setting the age-1 juvenile abundance as $N^\textrm{juv,NO}_{y+1,a=1} = \textrm{Smolt}^\textrm{NOS}_{y+1} + \textrm{Smolt}^\textrm{HOS}_{y+1}$ and $N^\textrm{juv,HO}_{y+1,a=1} = \textrm{Smolt}^\textrm{Rel}_{y+1}$.
 
+# Derived quantities
+
+Once the projection completes, several derived quantities of interest related to hatchery production are calculated.
+
+## pHOS, pNOB
+
+The proportion of spawners that are hatchery-origin (pHOS, pHOSeff) and the proportion of brood that is natural-origin (pNOB) are calculated as:
+
+\begin{align}
+ \textrm{pHOS}_{y} &= \dfrac{\sum_a \textrm{HOS}_{y,a} \times \textrm{Fec}_{y,a}}{\sum_a(\textrm{HOS}_{y,a} + \textrm{NOS}_{y,a}) \textrm{Fec}_{y,a}} (\#eq:pHOS)\\
+ \textrm{pHOSeff}_{y} &= \dfrac{\sum_a \gamma \times \textrm{HOS}_{y,a} \times \textrm{Fec}_{y,a}}{\sum_a(\gamma \times \textrm{HOS}_{y,a} + \textrm{NOS}_{y,a}) \textrm{Fec}_{y,a}} (\#eq:pHOSeff)\\
+ \textrm{pNOB}_{y} &= \dfrac{\sum_a \gamma \times \textrm{HOS}_{y,a} \times \textrm{Fec}_{y,a}}{\sum_a(\gamma \times \textrm{HOS}_{y,a} + \textrm{NOS}_{y,a}) \textrm{Fec}_{y,a}} (\#eq:pNOB)
+\end{align}
+
+Equations \@ref(eq:pHOS)--\@ref(eq:pNOB) are weighted by age class fecundity, accounting for older age classes with larger contributions to the egg production.
+
+## Wild salmon
+
+With single brood-year returns, the proportion of wild salmon, natural-origin spawners whose parents were also natural spawners, has been calculated as
+
+\begin{equation}
+  \textrm{pWILD}_g = (1 - \textrm{pHOS}_g) \times
+  \dfrac{(1 - \textrm{pHOS}_{g-1})^2}
+  {(1 - \textrm{pHOS}_{g-1})^2 + 2 \gamma \times \textrm{pHOS}_{g-1}(1 - \textrm{pHOS}_{g-1}) +
+  \gamma^2 \textrm{pHOS}_{g-1}^2}
+  (\#eq:pWild)
+\end{equation}
+
+where $\textrm{pHOS} = \textrm{HOS}/(\textrm{HOS} + \textrm{NOS})$.
+
+The first term of Equation \@ref(eq:pWild) is the proportion of natural spawners in the current generation $g$.
+The ratio comprising the second term discounts the proportion of the current generation to include natural-origin spawners whose parents were both natural-origin spawners.
+Assuming non-assortative mating, the three terms in the denominator gives the composition of generation $g$ whose parents who are both natural-origin, mixed origin (one parent in natural-origin and the other is hatchery-origin), and both hatchery-origin.
+
+In salmonMSE, to generalize for mixed-brood year spawners, we calculate the probability weighted across brood-years and age class fecundity:
+
+\begin{equation}
+\textrm{pWILD}_y = \sum_a \left(\dfrac{\textrm{NOS}_{y,a}}{\sum_{a'}(\textrm{NOS}_{y,a'} + \textrm{HOS}_{y,a'})} \times
+\dfrac{(\sum_{a'} \textrm{pNOS}_{y-a,a'})^2}{(\sum_{a'} \textrm{pNOS}_{y-a,a'})^2 + 2 \gamma \times (\sum_{a'}\textrm{pNOS}_{y-a,a'})(\sum_{a'}\textrm{pHOS}_{y-a,a'}) + \gamma^2 (\sum_{a'}\textrm{pHOS}_{y-a,a'})^2}\right)
+(\#eq:pWildMixed)
+\end{equation}
+
+where 
+
+\begin{align}
+  \textrm{pNOS}_{y,a} &= \dfrac{\textrm{Fec}_a \times \textrm{NOS}_{y,a}}{\sum_a{\textrm{Fec}_a (\textrm{NOS}_{y,a}} + \textrm{HOS}_{y,a})} \\
+  \textrm{pHOS}_{y,a} &= \dfrac{\textrm{Fec}_a \times \textrm{HOS}_{y,a}}{\sum_a{\textrm{Fec}_a (\textrm{NOS}_{y,a}} + \textrm{HOS}_{y,a})}\\
+  (\#eq:pWildMixed)
+\end{align}
+
+In equation \@ref(eq:pWildMixed), the probability of finding a wild spawner in year $y$ is the sum of probabilities of finding a wild salmon over all ages.
+For each age $a$, the first ratio is the probability of finding a natural-origin spawner in year $y$.
+The second ratio is the probability of mating success from two parental natural-origin spawners in year $y-a$ using a Punnett square, assuming non-assortative mating across age and origin.
+The summation across dummy age variable $a'$ calculates the total proportion of spawners in a given year.
+
+## PNI
+
+PNI (proportionate natural influence) is an approximation of the rate of gene flow from the hatchery to the natural environment, calculated for the progeny in year $y+1$ from the parental composition of year $y$:
+
+\begin{equation}
+ \textrm{PNI}_{y+1} = \dfrac{\textrm{pNOB}_y}{\textrm{pNOB}_y + \textrm{pHOSeff}_y}
+ (\#eq:PNI)
+\end{equation}
+
+Generally, a combination of minimizing hatchery releases, increasing natural broodtake, and reducing the number hatchery origin spawners maintains high PNI, i.e., low rate of gene flow from the hatchery to natural environment.
+
+If there is no natural-origin brood, e.g., brood is imported or there are only strays, then PNI is calculated with equation 6 of @withler2018:
+
+\begin{equation}
+ \textrm{PNI}_{y+1} = \dfrac{h^2}{h^2 + (1 - h^2 + \omega^2) \textrm{pHOSeff}_y}
+ (\#eq:AllImportPNI)
+\end{equation}
+
+where $h$ and $\omega$ are defined in Appendix \@ref(app:fitness).
