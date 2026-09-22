@@ -7,7 +7,7 @@ french_title: |
 author: |
   Quang C. Huynh^1^,
   Carrie A. Holt^2^,
-  Anna Potapova^3^,
+  Anna Potapova^3^, and
   Brooke M. Davis^3^
 
 english_address: |
