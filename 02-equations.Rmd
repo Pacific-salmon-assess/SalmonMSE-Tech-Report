@@ -20,7 +20,7 @@ K^\textrm{HO,PT}_{y,a} &= \left(1 - \exp(-v^\textrm{PT}_a F^\textrm{PT}_y)\right
 
 where $v$ is vulnerability at age and $F$ is instantaneous fishing mortality.
 
-If management is by target harvest rate, then the specified harvest rate $u^\textrm{PT}_y$ in the pre-terminal fishery is used to calculate $F^\textrm{PT}_y$ such that:
+The realized harvest rate $u^\textrm{PT}_y$ in the pre-terminal fishery is used to calculate $F^\textrm{PT}_y$ such that:
 
 \begin{equation}
 u^\textrm{PT}_y = \frac{\sum_a(K^\textrm{NO,PT}_{y,a} + K^\textrm{HO,PT}_{y,a})\times \textrm{AEQ}_a}{\sum_a\left((K^\textrm{NO,PT}_{y,a} + K^\textrm{HO,PT}_{y,a}) \times \textrm{AEQ}_a + (N^\textrm{juv,NO}_{y,a} + N^\textrm{juv,HO}_{y,a})\exp(-v^\textrm{PT}_a F^\textrm{PT}_y)\times r_a)\right)}
@@ -38,20 +38,28 @@ r_a + (1 - r_a)\exp(-M_a) \times \textrm{AEQ}_{a+1} &, a = 1, \ldots, A-1
 (\#eq:AEQ)
 \end{equation}
 
-If management is by target catch $K^\textrm{PT,target}_y$, then instantaneous fishing mortality $F^\textrm{PT}_y$ is solved such that 
+If management is by target harvest rate $u^\textrm{PT,target}_y$, then the realized harvest rate can vary by an implementation error term $I$, where:
 
 \begin{equation}
-K^\textrm{PT,target}_y = \sum_a K^\textrm{NO,PT}_{y,a} + \sum_a K^\textrm{HO,PT}_{y,a}
+\textrm{logit}(u^\textrm{PT}_y) = \textrm{logit}(u^\textrm{PT,target}_y) + I^\textrm{PT}_y
+(\#eq:PTER)
+\end{equation}
+
+If management is by target catch $K^\textrm{PT,target}_y$, then instantaneous fishing mortality $F^\textrm{PT}_y$ is solved such that
+
+\begin{equation}
+K^\textrm{PT,target}_y \times (1 + I^\textrm{PT}_y) = \sum_a K^\textrm{NO,PT}_{y,a} + \sum_a K^\textrm{HO,PT}_{y,a}
 (\#eq:FishMortCTarget)
 \end{equation}
 
 Target harvest rate or target catch can be constant with time, or a function $g$ of abundance, for example:
 
-$$
-u^\textrm{PT}_y = g^\textrm{PT}(N^\textrm{juv,NO}_{y,a}, N^\textrm{juv,HO}_{y,a}, m)
-$$
+\begin{align}
+u^\textrm{PT,target}_y &= g^\textrm{PT}(N^\textrm{juv,NO}_{y,a}\times\vartheta^\textrm{PT}_y, N^\textrm{juv,HO}_{y,a}\times\vartheta^\textrm{PT}_y, m)\\
+K^\textrm{PT,target}_y &= g^\textrm{PT}(N^\textrm{juv,NO}_{y,a}\times\vartheta^\textrm{PT}_y, N^\textrm{juv,HO}_{y,a}\times\vartheta^\textrm{PT}_y, m)
+\end{align}
 
-where $m$ is the mark rate.
+where $\vartheta^\textrm{PT}_y$ is the forecast error (observation error) and $m$ is the mark rate.
 
 Alternative equations are used if mark-selective fishing is implemented (Appendix \@ref(app:msf)).
 Modifications for mixed-stock fisheries are described in Appendix \@ref(app:multi).
@@ -84,27 +92,33 @@ Assuming no mark-selective fishing, the retained catch of the terminal ($\textrm
   (\#eq:TermCatch)
 \end{align}
 
-If management is by target harvest rate, then the specified harvest rate $u^\textrm{T}_y$ is used to calculate instantaneous fishing mortality $F^\textrm{T}$, where
+The specified harvest rate $u^\textrm{T}_y$ is used to calculate instantaneous fishing mortality $F^\textrm{T}$, where
 
 \begin{equation}
 u^\textrm{T}_y = \frac{\sum_a(K^\textrm{NO,T}_{y,a} + K^\textrm{HO,T}_{y,a})}{\sum_a(R^\textrm{NO}_{y,a} + R^\textrm{HO}_{y,a})}
 (\#eq:TF)
 \end{equation}
 
+If management is by target harvest rate $u^\textrm{T,target}_y$, then the realized harvest rate can vary by an implementation error term $I$, where:
+
+\begin{equation}
+\textrm{logit}(u^\textrm{T}_y) = \textrm{logit}(u^\textrm{T,target}_y) + I^\textrm{T}_y
+(\#eq:TER)
+\end{equation}
+
 If management is by target catch $K^\textrm{T,target}_y$, then the fishing mortality is solved such that
 
 \begin{equation}
-K^\textrm{T,target}_y = \sum_a K^\textrm{NO,T}_{y,a} + \sum_a K^\textrm{HO,T}_{y,a}
+K^\textrm{T,target}_y \times (1 + I^\textrm{T}_y) = \sum_a K^\textrm{NO,T}_{y,a} + \sum_a K^\textrm{HO,T}_{y,a}
 (\#eq:CatchTarget)
 \end{equation}
 
-Target harvest rate or target catch can be constant with time, or a function $g$ of the return, for example:
+Target harvest rate or target catch can be constant with time, or a function $g$ of abundance, for example:
 
-$$
-u^\textrm{T}_y = g^\textrm{T}(R^\textrm{NO}_{y,a}, R^\textrm{HO}_{y,a}, m)
-$$
-
-where $m$ is the mark rate.
+\begin{align}
+u^\textrm{T,target}_y &= g^\textrm{T}(R^\textrm{NO}_{y,a}\times\vartheta^\textrm{T}_y, R^\textrm{HO}_{y,a}\times\vartheta^\textrm{T}_y, m)\\
+K^\textrm{T,target}_y &= g^\textrm{T}(R^\textrm{NO}_{y,a}_{y,a}\times\vartheta^\textrm{T}_y, R^\textrm{HO}_{y,a}\times\vartheta^\textrm{T}_y, m)
+\end{align}
 
 Alternative equations are used if mark-selective fishing is implemented (Appendix \@ref(app:msf)).
 Modifications for mixed-stock fisheries are described in Appendix \@ref(app:multi).

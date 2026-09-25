@@ -43,10 +43,10 @@ Mixed-stock fisheries are possible for either the preterminal or terminal fisher
 
 From a specified harvest rate $u^\textrm{PT}_y$, the instantaneous fishing mortality rate $F^\textrm{PT}_y$ (related to fishing intensity of the preterminal fishery) is solved such that:
 
-$$
+\begin{equation}
 u^\textrm{PT}_y = \frac{\sum_a\sum_s(K^\textrm{NO,PT}_{y,a,s} + K^\textrm{HO,PT}_{y,a,s})\times \textrm{AEQ}_{a,s}}{\sum_a\sum_s\left((K^\textrm{NO,PT}_{y,a,s} + K^\textrm{HO,PT}_{y,a,s}) \times \textrm{AEQ}_{a,s} + (N^\textrm{juv,NO}_{y,a,s} + N^\textrm{juv,HO}_{y,a,s})\exp(-v^\textrm{PT}_{a,s} F^\textrm{PT}_y)\times r_{a,s})\right)}
 (\#eq:PTFMultiPop)
-$$
+\end{equation}
 
 where
 

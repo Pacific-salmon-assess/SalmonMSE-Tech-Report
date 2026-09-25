@@ -24,6 +24,7 @@ hob,\textrm{HOB},Hatchery-origin brood,Output,Output,SMSE@HOB
 hobstray,\textrm{HOB}_\textrm{stray},Brood from strays,Output,Output,SMSE@HOB_stray
 hos,\textrm{HOS},Hatchery-origin spawners,Output,Output,SMSE@HOS
 hoseff,\textrm{HOS}_\textrm{eff},Hatchery-origin spawners (spawning output discounted),Output,Output,SMSE@HOSeff
+i,I,Implementation error in harvest,Input,Input,"SOM@Harvest@ImpErr_PT, SOM@Harvest@ImpErr_T"
 irc,\textrm{IRC},"In-river catch after brood, before spawning",Internal variable,Internal variable,N/A
 kappa,\kappa,"Productivity (maximum recruitment production rate), units of recruits per spawner",Input,Input,SOM@Bio@kappa
 kho,K^\textrm{HO},Kept catch of hatchery-origin fish,Output,Output,"SMSE@KPT_HOS, SMSE@KT_HOS"
@@ -70,6 +71,7 @@ stray,\textrm{Stray},Strays of hatchery-origin fish,Input,Input,SOM@Hatchery@str
 syearling,s_\textrm{yearling},Survival of hatchery eggs to yearling life stage,Input,Input,SOM@Hatchery@s_egg_smolt
 tau,\tau,"Per capita spawners at replacement, units of spawner per smolt",Input,Input,SOM@Bio@tau
 theta,\theta,Optimal phenotypic value for natural and hatchery environments,Fitness,Input,SOM@Hatchery@theta
+theta2,\vartheta,Forecast error for harvest,Input,Input,"SOM@Harvest@ForeErr_PT, SOM@Harvest@ForeErr_T"
 u,u,Fishery harvest rate (kept catch),Input,Input,"SOM@Harvest@u_preterminal, SOM@Harvest@u_terminal"
 uho,U^\textrm{HO},Fishery exploitation rate (kept catch and dead releases) of hatchery-origin fish,Output,Output,"SMSE@ExPT_HOS, SMSE@ExT_HOS"
 uno,U^\textrm{NO},Fishery exploitation rate (kept catch and dead releases) of natural-origin fish,Output,Output,"SMSE@ExPT_NOS, SMSE@ExT_NOS"
