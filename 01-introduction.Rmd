@@ -20,8 +20,6 @@ salmonMSE can be used to address questions such as:
 - How do changes in environmental drivers impact ability to rebuild populations?
 - What combination of fishery exploitation rates and hatchery production targets meets spawner abundance objectives?
 
-# MODEL OVERVIEW
-
 This document is intended to be summary of the age-structured projection model in salmonMSE.
 The equations are structured in the following order:
 
@@ -36,7 +34,7 @@ A glossary of important state variables is provided in Table \@ref(tab:glossary)
 
 Appendices describe various modifications to the system dynamics including mark-selective fishing (Appendix \@ref(app:msf)), fitness impacts on juvenile survival from genetic drift due to selection against hatchery traits in the natural environment (Appendix \@ref(app:fitness)), and multi-population models (Appendix \@ref(app:multi)).
 
-# SOFTWARE OVERVIEW
+# MODEL OVERVIEW
 
 The equations are presented for salmonMSE version 3.1.0.
 The corresponding R code is available on Github at [https://github.com/Blue-Matter/salmonMSE](https://github.com/Blue-Matter/salmonMSE).
