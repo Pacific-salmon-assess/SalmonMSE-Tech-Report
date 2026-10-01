@@ -23,25 +23,25 @@ salmonMSE can be used to address questions such as:
 # MODEL OVERVIEW
 
 This document is intended to be summary of the age-structured projection model in salmonMSE. 
-The projection tool uses an operating model to simulate population trajectories and outcomes of management procedures, while incorporating feedbacks between the two at each timestep. 
+The projection tool uses an operating model to simulate population trajectories and outcomes of management procedures, while incorporating feedback between the two at each timestep. 
 The operating model may be parameterized with data and outputs from historical modelling, or values drawn from expert knowledge or literature sources.
 The operating model is defined by five components, outlined below: biological, habitat, hatchery, harvest and historical.
-Outcomes can be summarized with a range of probabilistic performance metrics, such as the probability of exceeding spawner abundance reference points or PNI thresholds.
+Outcomes can be summarized with a range of probabilistic performance metrics, such as the probability of exceeding spawner abundance reference points or PNI (proportionate natural influence) thresholds.
 salmonMSE can be of particular interest for modelling multiple populations co-mingling in mixed-stock fisheries, or interacting via straying. 
 In such cases, the components of the operating model can be defined and simulated across multiple populations simultaneously. 
 
 
 ## Biological
 
-The biological component of the operating model specifies the life history parameters of the modelled population(s), including age classes, survival and maturity rates, fecundity and strock-recruit parameters.
+The biological component of the operating model specifies the life history parameters of the modelled population(s), including longevity, survival and maturity rates, fecundity and stock-recruit parameters.
 Survival rates include age-specific natural marine survival and en-route survival for spawners in freshwater.
-Stock-recruit dynamics, used to model density-dependence between the fry and smolt life stages, can be specified through parameters of either a Ricker or Beverton-Holt model. 
-There model also contains the flexibility to model multiple life history groups with a population <!-- AP: is there an example of where this would be applicable?-->.
+Stock-recruit dynamics, used to model density-dependence from the egg to smolt life stages, can be specified through parameters of either a Ricker or Beverton-Holt model. 
+The model also contains the flexibility to model multiple life history groups within population that vary in natural survival and maturity (see @sorel2023 and @brown2026 for examples in Chinook salmon).
 
 ## Habitat
 
 The habitat component contains freshwater survival parameters, used to model the effects of changing environmental and climate conditions, or habitat improvements through mitigations and restoration actions.
-Specifying the paramaters here allows the user to partition density-dependence in freshwater across the transitions between the spawner, egg, fry and smolt life stages.
+Specifying the parameters here allows the user to partition density-dependence in freshwater across the transitions between the spawner, egg, fry and smolt life stages.
 Productivity and capacity parameters can be defined for either Beverton-Holt or hockey-stick relationships.
 Competition between hatchery releases and natural-origin fish can be modelled as well (see hatchery section below).
 
@@ -50,19 +50,19 @@ Competition between hatchery releases and natural-origin fish can be modelled as
 The hatchery component defines parameters related to hatchery management, including hatchery releases and broodstoock collection, as well as the characteristics of hatchery-origin fish, including fitness and survival rates that differ from those of natural-origin fish.
 The model allows the user to specify a target number of releases and desired proportion of natural-origin spawners in the brood, and calculates broodtake and resulting hatchery production using information on available spawners, fecundity and survival rates of brood and eggs. 
 Straying rates can also be included to represent inputs from other systems.
-Multiple hatchery release strategies can be modelled, with different survival rates across strategies.
+Multiple hatchery release strategies can be modelled, with different survival and maturity rates across strategies.
 
 ## Harvest
 
-The harvest component specifies exploitation rates and harvest control rules for pre-terminal and terminal fisheries.
+The harvest component specifies exploitation rates for pre-terminal and terminal fisheries.
 Fisheries can either be managed by exploitation rate, or by catch targets, with differential vulnerability to harvest across age classes, allowing the user to model selectivity in the fishery.
-A custom harvest control rule can be defined.
+A custom harvest control rule can be defined where the target exploitation rate or catch is a function of abundance, subject to observation error and implementation error.
 Mark-selective fisheries can also be implemented in either fishery, accounting for mortality rates of released fish. 
 
 ## Historical
 
 The historical component contains the historical starting conditions of the simulation.
-These can be either fixed values or posterior distributions.
+These can be either fixed values or posterior distributions from an estimation model.
 
 
 # SIMULATION PROCESS 

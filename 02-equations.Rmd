@@ -1,7 +1,7 @@
 
 # Juvenile marine abundance
-<!--AP: can we specify here what juvenile means - essentially abundance of each age class before returning as spawners.In some contexts juvenile would refer to just the freshwater life stages -->
-Let $N^\textrm{juv,NO}_{y,a}$ be the natural-origin (NO) juvenile abundance and $N^\textrm{juv,HO}_{y,a}$ be the hatchery-origin (HO) juvenile abundance of age $a$ at the beginning of the year $y$.
+
+Let $N^\textrm{juv,NO}_{y,a}$ be the natural-origin (NO) juvenile abundance and $N^\textrm{juv,HO}_{y,a}$ be the hatchery-origin (HO) juvenile abundance of age $a$ at the beginning of the year $y$ (juveniles represent the abundance of each age class before returning as spawners).
 
 ## Pre-terminal fishery
 
