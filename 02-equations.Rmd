@@ -1,9 +1,13 @@
 
-# Juvenile marine abundance
+# DYNAMICS EQUATIONS
+
+While the model is stochastic, the equations below describe the biological dynamics within a single simulation replicate.
+Variability among simulations is not described here because users have full control of stochastic, time-varying parameters.
+For example, users manually sample the desired probability density functions to generate Monte Carlo samples of a parameter, or specify the year-specific values of a parameter to create a temporal trend in a parameter.
+
+## Juvenile marine abundance and pre-terminal fishery
 
 Let $N^\textrm{juv,NO}_{y,a}$ be the natural-origin (NO) juvenile abundance and $N^\textrm{juv,HO}_{y,a}$ be the hatchery-origin (HO) juvenile abundance of age $a$ at the beginning of the year $y$ (juveniles represent the abundance of each age class before returning as spawners).
-
-## Pre-terminal fishery
 
 Harvest in the pre-terminal ($\textrm{PT}$) fishery of juveniles occurs in the first half of the year.
 Assuming no mark-selective fishing, the kept catch $K$ is
@@ -62,7 +66,7 @@ The juvenile abundance in the next year $y+1$ consists of fish that survived pre
  (\#eq:JuvAbund)
 \end{align}
 
-# Recruitment
+## Recruitment and terminal fishery
 
 The recruitment $R$ is calculated juvenile fish that survive pre-terminal harvest and then mature:
 
@@ -71,8 +75,6 @@ The recruitment $R$ is calculated juvenile fish that survive pre-terminal harves
   R^\textrm{HO}_{y,a} &= N^\textrm{juv,HO}_{y,a}\exp(-v^\textrm{T}_aF^\textrm{PT}_y)r_{y,a}
    (\#eq:Recruitment)
 \end{align}
-
-## Terminal fishery
 
 Assuming no mark-selective fishing, the retained catch of the terminal ($\textrm{T}$) fishery is:
 
@@ -107,7 +109,7 @@ where $m$ is the mark rate.
 Alternative equations are used if mark-selective fishing is implemented (Appendix \@ref(app:msf)).
 Modifications for mixed-stock fisheries are described in Appendix \@ref(app:multi).
 
-# Escapement
+## Escapement
 
 The escapement $E$ consists of the survivors of the terminal fishery:
 
@@ -117,7 +119,7 @@ The escapement $E$ consists of the survivors of the terminal fishery:
   (\#eq:Escapement)
 \end{align}
 
-# Broodtake
+## Broodtake
 
 The escapement from marine fisheries experience en-route mortality and then some proportion may be used for brood.
 Hatchery production operates around the target number of annual releases of sub-yearlings $n^\textrm{subyearling}_\textrm{target}$ and yearlings $n^\textrm{yearling}_\textrm{target}$ specified by the user.
@@ -138,7 +140,7 @@ From here, there are two ways to specify how natural-origin brood (NOB) and hatc
 These parameters roughly follow the settings used in AHA [@hsrg2020].
 2. Custom brood function that allows user to write an algorithm that calculates brood from the return. The code ensures target releases are not exceeded.
 
-## Parameterization 1: Parameteric brood calculation
+_Parameterization 1: Parameteric brood calculation_
 
 Two parameters control NOB and HOB.
 First, the target proportion of natural-origin fish in the broodstock ($p^\textrm{NOB}_\textrm{target}$) is specified. 
@@ -217,7 +219,7 @@ They are solved annually to satisfy the following conditions:
 Annual egg production can fail to reach the target if there is insufficient unmarked escapement and $p^\textrm{broodtake,unmarked}_y = p^\textrm{NOB}_\textrm{max}$. 
 In this case, the remaining deficit in egg production is met by increasing HOB (the realized $p^\textrm{NOB}$ can be lower than the target).
 
-## Parameterization 2: Custom brood function
+_Parameterization 2: Custom brood function_
 
 In the custom brood function $f$, the user specifies the various types of brood taken from the available in-river return:
 
@@ -242,7 +244,7 @@ m
 In contrast to Parameterization 1, the custom function allows the user to specify age-selective brood rules.
 The code also reduces brood to ensure the release target is not exceeded.
 
-# In-river removals
+## In-river removals
 
 After brood, further removals, e.g. as part of an in-river fishery or to manage natural spawning, is possible.
 The in-river catch (IRC) or natural-origin fish is
@@ -279,7 +281,7 @@ p^\textrm{IRC,HO}_y = h_2(E^\textrm{NO}_{y,a}, E^\textrm{HO}_{y,a}, m)
 $$
 
 
-# Spawners
+## Spawners
 
 Natural-origin spawners (NOS) is the escapement that survive return migration, are not used for brood, and are not removed from the spawning ground:
 
@@ -303,7 +305,7 @@ If HOB are collected from fish returning to the hatchery, then the hatchery-orig
 (\#eq:HOS2)
 \end{equation}
 
-# Natural-origin juvenile production
+## Natural-origin juvenile production
 
 This section describes the calculation of natural-origin juveniles of the next generation from the spawner abundance in the previous year.
 
@@ -313,7 +315,7 @@ Modified equations accounting for fitness are described in Appendix \@ref(app:fi
 The outmigrating juveniles of the next generation is predicted from the spawners from the previous year.
 Two parameterizations are possible: (1) a single density-dependent stock-recruit relationship (SRR) is used model egg-juvenile survival, or (2) a series of density-dependent functions models survival at intermittent freshwater life stages.
 
-## Parameterization 1: Juvenile production from single stock-recruit relationship
+_Parameterization 1: Juvenile production from single stock-recruit relationship_
 
 Egg production is calculated as
 
@@ -363,7 +365,7 @@ where
 (\#eq:BHParameters)
 \end{align}
 
-## Parameterization 2: Juvenile production from stage-specific survival
+_Parameterization 2: Juvenile production from stage-specific survival_
 
 The spawner to juvenile life stages can also be modeled through a series of density-dependent functions, following the general approach of @jorgensen2021.  
 Four relationships are modeled:
@@ -387,7 +389,7 @@ Approaches such as HARP [@beechie2021] and CEMPRA [@bayly2025] can inform produc
 knitr::include_graphics(file.path("figures", "habitat.png"))
 ```
 
-### Pre-spawn mortality 
+_Stage 1: Pre-spawn mortality_
 
 Pre-spawn (ps) mortality can occur, where the surviving spawners $\widetilde{\textrm{NOS}}_y$ and $\widetilde{\textrm{HOS}}_y$ are:
 
@@ -411,7 +413,7 @@ The alternative hockey-stick formulation is
 
 with similar parameterizations for subsequent life stages (not further described below). 
 
-### Egg incubation mortality
+_Stage 2: Egg incubation mortality_
 
 The initial egg production is calculated after pre-spawn mortality:
 
@@ -433,7 +435,7 @@ Second, the surviving egg production ($\widetilde{\textrm{Egg}}_y$) can be reduc
 
 where productivity $P$ is the maximum survival as spawning output approaches zero and $C$ is the asymptotic production (egg capacity).
 
-### Egg to fry mortality
+_Stage 3: Egg to fry mortality_
 
 Fry production is modeled as:
 
@@ -447,7 +449,7 @@ Fry production is modeled as:
 
 where $\varepsilon^\textrm{egg-fry}_y$ is a year-specific deviation in survival. They can be modeled as a function of a proposed time series of environmental variables $\eta$, for example, $\varepsilon^\textrm{egg-fry}_y = \prod_j f(\eta_{y,j})$ or $\varepsilon^\textrm{egg-fry}_y = \sum_j f(\eta_{y,j})$.
 
-### Fry to smolt mortality
+_Stage 4: Fry to smolt mortality_
 
 The last freshwater life stage with smolt production is modeled as:
 
@@ -476,7 +478,7 @@ where $n^\textrm{subyearling}_y$ and $n^\textrm{yearling}_y$ are subyearling and
 
 -->
 
-# Hatchery-origin juvenile production
+## Hatchery-origin juvenile production_
 
 The hatchery egg production is
 
@@ -520,11 +522,11 @@ $$
 $$
 -->
 
-# Next year's juvenile abundance
+## Next year's juvenile abundance
 
 The projection continues in the next year $y+1$ by setting the age-1 juvenile abundance as $N^\textrm{juv,NO}_{y+1,a=1} = \textrm{Smolt}^\textrm{NOS}_{y+1} + \textrm{Smolt}^\textrm{HOS}_{y+1}$ and $N^\textrm{juv,HO}_{y+1,a=1} = \textrm{Smolt}^\textrm{Rel}_{y+1}$.
 
-# Derived quantities
+# DERIVED QUANTITIES
 
 Once the projection completes, several derived quantities of interest related to hatchery production are calculated.
 
