@@ -30,7 +30,7 @@ E^\textrm{HO}_{y,a,s'} = \widetilde{E}^\textrm{HO}_{y,a,s'} \times p^\textrm{str
 \end{equation}
 
 Equation \@ref(eq:Stray) informs Equations \@ref(eq:BroodtakeImportStray), \@ref(eq:HOS1), \@ref(eq:HOS2) in the main text regarding hatchery-origin brood and hatchery-origin spawners.
-Equation \@ref(eq:MultiPopEscapement) updates Equation \@ref(eq:Escapement) in the main text regarding hatchery-origin escapement.
+Equation \@ref(eq:MultiPopEscapement) updates Equation \@ref(eq:EscapementHO) in the main text regarding hatchery-origin escapement.
 
 ## Multi-stock fisheries
 
@@ -51,9 +51,9 @@ u^\textrm{PT}_y = \frac{\sum_a\sum_s(K^\textrm{NO,PT}_{y,a,s} + K^\textrm{HO,PT}
 where
 
 \begin{align}
-K^\textrm{NO,PT}_{y,a,s} &= \left(1 - \exp(-v^\textrm{PT}_{a,s} F^\textrm{PT}_y)\right)N^\textrm{juv,NO}_{y,a,s}\\
-K^\textrm{HO,PT}_{y,a,s} &= \left(1 - \exp(-v^\textrm{PT}_{a,s} F^\textrm{PT}_y)\right)N^\textrm{juv,HO}_{y,a,s}
-(\#eq:PTKeptCatchMultiPop)
+K^\textrm{NO,PT}_{y,a,s} = \left(1 - \exp(-v^\textrm{PT}_{a,s} F^\textrm{PT}_y)\right)N^\textrm{juv,NO}_{y,a,s} (\#eq:PTKeptCatchMultiPop1)\\
+K^\textrm{HO,PT}_{y,a,s} = \left(1 - \exp(-v^\textrm{PT}_{a,s} F^\textrm{PT}_y)\right)N^\textrm{juv,HO}_{y,a,s}
+(\#eq:PTKeptCatchMultiPop2)
 \end{align}
 
 Similarly, from a specified harvest rate of the terminal fishery $u^\textrm{T}_y$, the corresponding instantaneous fishing mortality rate $F^\textrm{T}_y$ satisfies:
@@ -66,9 +66,8 @@ u^\textrm{T}_y = \frac{\sum_a(K^\textrm{NO,T}_{y,a,s} + K^\textrm{HO,T}_{y,a,s})
 where
 
 \begin{align}
-  K^\textrm{NO,T}_{y,a,s} &= \left(1 - \exp(-v^\textrm{T}_{a,s} F^\textrm{T}_y)\right)R^\textrm{NO}_{y,a,s}\\
-  K^\textrm{HO,T}_{y,a,s} &= \left(1 - \exp(-v^\textrm{T}_{a,s} F^\textrm{T}_y)\right)R^\textrm{HO}_{y,a,s}
-  (\#eq:TermCatchMultiPop)
+  K^\textrm{NO,T}_{y,a,s} = \left(1 - \exp(-v^\textrm{T}_{a,s} F^\textrm{T}_y)\right)R^\textrm{NO}_{y,a,s} (\#eq:TermCatchMultiPop1)\\
+  K^\textrm{HO,T}_{y,a,s} = \left(1 - \exp(-v^\textrm{T}_{a,s} F^\textrm{T}_y)\right)R^\textrm{HO}_{y,a,s} (\#eq:TermCatchMultiPop2)
 \end{align}
 
 All variables are identical as in main text except with an additional subscript $s$ pertaining to the abundance, catch, maturity, and vulnerability of population $s$. 

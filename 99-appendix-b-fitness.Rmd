@@ -41,13 +41,17 @@ If the phenotypic trait value $z$ in the population is a random normal variable 
   (\#eq:MeanFitness)
 \end{equation}
 
-The mean phenotype $\bar{z}$ is calculated iteratively, where the change $\Delta\bar{z}$ from generation $g-1$ to $g$ is
+The change in mean phenotype $\Delta\bar{z}$ from generation $g-1$ to $g$ is
 
-\begin{align}
-  \Delta\bar{z} &= \bar{z}_g - \bar{z}_{g-1} = (\bar{z}^\prime_{g-1} - \bar{z}_{g-1})h^2\\
-  \bar{z}_g &= \bar{z}_{g-1} + (\bar{z}^\prime_{g-1} - \bar{z}_{g-1})h^2
-  (\#eq:MeanPhenotype)
-\end{align}
+\begin{equation}
+\Delta\bar{z} = \bar{z}_g - \bar{z}_{g-1} = (\bar{z}^\prime_{g-1} - \bar{z}_{g-1})h^2 (\#eq:PhenotypeChange)
+\end{equation}
+
+After simplification, the mean phenotype $\bar{z}$ in generation $g$ is 
+
+\begin{equation}
+\bar{z}_g = \bar{z}_{g-1} + (\bar{z}^\prime_{g-1} - \bar{z}_{g-1})h^2 (\#eq:MeanPhenotype)
+\end{equation}
 
 where $h^2$ is the heritability of $z$ and $\bar{z}^\prime_{g-1}$ is the trait value after applying the fitness function, defined as:
 
@@ -128,19 +132,17 @@ If a single egg-juvenile survival function is used, then the egg-juvenile surviv
 In the Ricker stock-recruit function, $\alpha$ and $\beta$ are modified as:
 
 \begin{align}
-  \textrm{Smolt}^\textrm{NOS}_{y+1} &= \alpha'_{y+1} \times \textrm{Fry}^\textrm{NOS}_{y+1} \exp(-\beta'_{y+1}(\textrm{Fry}^\textrm{NOS}_{y+1} + \textrm{Fry}^\textrm{HOS}_{y+1}))\\
-  \textrm{Smolt}^\textrm{HOS}_{y+1} &= \alpha'_{y+1} \times \textrm{Fry}^\textrm{HOS}_{y+1} \exp(-\beta'_{y+1}(\textrm{Fry}^\textrm{NOS}_{y+1} + \textrm{Fry}^\textrm{HOS}_{y+1})
-  (\#eq:SmoltProdFitnessRicker)
+  \textrm{Smolt}^\textrm{NOS}_{y+1} = \alpha'_{y+1} \times \textrm{Fry}^\textrm{NOS}_{y+1} \exp(-\beta'_{y+1}(\textrm{Fry}^\textrm{NOS}_{y+1} + \textrm{Fry}^\textrm{HOS}_{y+1})) (\#eq:SmoltProdFitnessRicker1)\\
+  \textrm{Smolt}^\textrm{HOS}_{y+1} = \alpha'_{y+1} \times \textrm{Fry}^\textrm{HOS}_{y+1} \exp(-\beta'_{y+1}(\textrm{Fry}^\textrm{NOS}_{y+1} + \textrm{Fry}^\textrm{HOS}_{y+1}) (\#eq:SmoltProdFitnessRicker2)
 \end{align}
 
 where
 
 \begin{align}
-  \alpha'_{y+1} &= (\bar{W}^\textrm{nat.}_y)^{\ell_\textrm{fry}}\times\kappa/\phi\\
-  \beta'_{y+1} &= 1/[S_\textrm{max} \dfrac{\phi}{\tau} (\bar{W}^\textrm{nat.}_y)^{\ell_\textrm{fry}}]\\
-  \textrm{Fry}^\textrm{NOS}_{y+1} &= \textrm{Egg}^\textrm{NOS}_y \times (\bar{W}^\textrm{nat.}_y)^{\ell_\textrm{egg}}\\
-  \textrm{Fry}^\textrm{HOS}_{y+1} &= \textrm{Egg}^\textrm{HOS}_y \times (\bar{W}^\textrm{nat.}_y)^{\ell_\textrm{egg}}
-  (\#eq:SmoltProdFitnessRicker2)
+  \alpha'_{y+1} = (\bar{W}^\textrm{nat.}_y)^{\ell_\textrm{fry}}\times\kappa/\phi (\#eq:SmoltProdFitnessAlpha)\\
+  \beta'_{y+1} = 1/[S_\textrm{max} \dfrac{\phi}{\tau} (\bar{W}^\textrm{nat.}_y)^{\ell_\textrm{fry}}] (\#eq:SmoltProdFitnessBeta)\\
+  \textrm{Fry}^\textrm{NOS}_{y+1} = \textrm{Egg}^\textrm{NOS}_y \times (\bar{W}^\textrm{nat.}_y)^{\ell_\textrm{egg}} (\#eq:SmoltProdFitnessFryNOS)\\
+  \textrm{Fry}^\textrm{HOS}_{y+1} = \textrm{Egg}^\textrm{HOS}_y \times (\bar{W}^\textrm{nat.}_y)^{\ell_\textrm{egg}} (\#eq:SmoltProdFitnessFryHOS)
 \end{align}
 
 The loss parameter $\ell_j$, where $j \in \{\textrm{egg}, \textrm{fry}, \textrm{juv}\}$ and $\sum_j \ell_j = 1$, apportions mortality among different life stages due to lower population fitness (loss can be turned off if $\ell_j = 0$ for all $j$).
@@ -148,29 +150,21 @@ The loss parameter $\ell_j$, where $j \in \{\textrm{egg}, \textrm{fry}, \textrm{
 With the Beverton-Holt function, $\alpha$ and $\beta$ are modified as: 
 
 \begin{align}
-  \textrm{Smolt}^\textrm{NOS}_{y+1} &= \frac{\alpha'_{y+1} \times
-  \textrm{Fry}^\textrm{NOS}_{y+1}}{1 + \beta'_{y+1}(\textrm{Fry}^\textrm{NOS}_{y+1} + \textrm{Fry}^\textrm{HOS}_{y+1})}\\
-  \textrm{Smolt}^\textrm{HOS}_{y+1} &= \frac{\alpha'_{y+1} \times
-  \textrm{Fry}^\textrm{HOS}_{y+1}}{1 + \beta'_{y+1}(\textrm{Fry}^\textrm{NOS}_{y+1} + \textrm{Fry}^\textrm{HOS}_{y+1})} (\#eq:SmoltProdFitnessBH)
+  \textrm{Smolt}^\textrm{NOS}_{y+1} = \frac{\alpha'_{y+1} \times
+  \textrm{Fry}^\textrm{NOS}_{y+1}}{1 + \beta'_{y+1}(\textrm{Fry}^\textrm{NOS}_{y+1} + \textrm{Fry}^\textrm{HOS}_{y+1})} (\#eq:SmoltProdFitnessBH1)\\
+  \textrm{Smolt}^\textrm{HOS}_{y+1} = \frac{\alpha'_{y+1} \times
+  \textrm{Fry}^\textrm{HOS}_{y+1}}{1 + \beta'_{y+1}(\textrm{Fry}^\textrm{NOS}_{y+1} + \textrm{Fry}^\textrm{HOS}_{y+1})} (\#eq:SmoltProdFitnessBH2)
 \end{align}
 
-where
-
-\begin{equation}
-  \beta'_{y+1} = \alpha/(C_\textrm{egg-smolt} \times (\bar{W}^\textrm{nat.}_y)^{\ell_\textrm{fry}})
-  (\#eq:SmoltProdFitnessBH2)
-\end{equation}
-
-and all other symbols are as defined in Equation \@ref(eq:SmoltProdFitnessRicker2).
+where $\beta'_{y+1} = \alpha/(C_\textrm{egg-smolt} \times (\bar{W}^\textrm{nat.}_y)^{\ell_\textrm{fry}})$ and all other symbols are as defined in Equation \@ref(eq:SmoltProdFitnessRicker2).
 
 If stage-specific relationships are modeled, then the egg and fry fitness losses adjust the base productivity and capacity values in the corresponding life stage:
 
 \begin{align}
-  P^{'\textrm{egg-fry}}_y &= P^\textrm{egg-fry} \times (\bar{W}^\textrm{nat.}_y)^{\ell_\textrm{egg}}\\
-  P^{'\textrm{fry-smolt}}_y &= P^\textrm{fry-smolt} \times (\bar{W}^\textrm{nat.}_y)^{\ell_\textrm{fry}}\\
-  C^{'\textrm{egg-fry}}_y &= C^\textrm{egg-fry} \times (\bar{W}^\textrm{nat.}_y)^{\ell_\textrm{egg}}\\
-  C^{'\textrm{fry-smolt}}_y &= C^\textrm{fry-smolt} \times (\bar{W}^\textrm{nat.}_y)^{\ell_\textrm{fry}}\\
-  (\#eq:ProdAdjusted)
+  P^{'\textrm{egg-fry}}_y = P^\textrm{egg-fry} \times (\bar{W}^\textrm{nat.}_y)^{\ell_\textrm{egg}} (\#eq:ProdAdjusted1)\\
+  P^{'\textrm{fry-smolt}}_y = P^\textrm{fry-smolt} \times (\bar{W}^\textrm{nat.}_y)^{\ell_\textrm{fry}} (\#eq:ProdAdjusted2)\\
+  C^{'\textrm{egg-fry}}_y = C^\textrm{egg-fry} \times (\bar{W}^\textrm{nat.}_y)^{\ell_\textrm{egg}} (\#eq:ProdAdjusted3)\\
+  C^{'\textrm{fry-smolt}}_y = C^\textrm{fry-smolt} \times (\bar{W}^\textrm{nat.}_y)^{\ell_\textrm{fry}} (\#eq:ProdAdjusted4)
 \end{align}
 
 
