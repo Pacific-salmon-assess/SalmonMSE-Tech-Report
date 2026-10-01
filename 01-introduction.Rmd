@@ -22,14 +22,32 @@ salmonMSE can be used to address questions such as:
 
 # MODEL OVERVIEW
 
-This document is intended to be summary of the age-structured projection model in salmonMSE. 
+This document is intended to be summary of the age-structured projection model in salmonMSE.
+The equations are structured in the following order:
+
+- Juvenile marine abundance in the beginning of the annual time step, followed by preterminal fishing
+- Maturation and recruitment of the mature component of the population, followed by terminal fishing
+- Escapement from marine fisheries to the in-river return, where there is broodtake for hatchery programs and further in-river removals
+- Spawner abundance and egg production
+- Survival to outmigrating juveniles of the next generation in the next time step
+- Advancement of age classes of juveniles that did not mature in the previous time step
+
+A glossary of important state variables is provided in Table \@ref(tab:glossary). 
+
+Appendices describe various modifications to the system dynamics including mark-selective fishing (Appendix \@ref(app:msf)), fitness impacts on juvenile survival from genetic drift due to selection against hatchery traits in the natural environment (Appendix \@ref(app:fitness)), and multi-population models (Appendix \@ref(app:multi)).
+
+# SOFTWARE OVERVIEW
+
+The equations are presented for salmonMSE version 3.1.0.
+The corresponding R code is available on Github at [https://github.com/Blue-Matter/salmonMSE](https://github.com/Blue-Matter/salmonMSE).
+`ProjectSOM()` is the primary function that executes the projection and calls subsidiary functions that implement different components of the simulation (Table \@ref(tab:equation-table)).
+
 The projection tool uses an operating model to simulate population trajectories and outcomes of management procedures, while incorporating feedback between the two at each timestep. 
 The operating model may be parameterized with data and outputs from historical modelling, or values drawn from expert knowledge or literature sources.
 The operating model is defined by five components, outlined below: biological, habitat, hatchery, harvest and historical.
 Outcomes can be summarized with a range of probabilistic performance metrics, such as the probability of exceeding spawner abundance reference points or PNI (proportionate natural influence) thresholds.
 salmonMSE can be of particular interest for modelling multiple populations co-mingling in mixed-stock fisheries, or interacting via straying. 
 In such cases, the components of the operating model can be defined and simulated across multiple populations simultaneously. 
-
 
 ## Biological
 
@@ -64,33 +82,7 @@ Mark-selective fisheries can also be implemented in either fishery, accounting f
 The historical component contains the historical starting conditions of the simulation.
 These can be either fixed values or posterior distributions from an estimation model.
 
-
-# SIMULATION PROCESS 
-<!-- AP: suggesting this section break here but title can be whatever --> 
-
-The model is stochastic, and users have full control of stochastic, time-varying parameters.
-For example, users manually sample the desired probability density functions to generate Monte Carlo samples of a parameter and provide them to the model, or specify the year-specific values of a parameter to create a temporal trend in a parameter.
-In the interest of simplicity, the equations describe the biological dynamics within a single simulation replicate.
-
-The equations are structured in the following order:
-
-- Juvenile marine abundance in the beginning of the annual time step, followed by preterminal fishing
-- Maturation and recruitment of the mature component of the population, followed by terminal fishing
-- Escapement from marine fisheries to the in-river return, where there is broodtake for hatchery programs and further in-river removals
-- Spawner abundance and egg production
-- Survival to outmigrating juveniles of the next generation in the next time step
-- Advancement of age classes of juveniles that did not mature in the previous time step
-
-A glossary of important state variables is provided in Table \@ref(tab:glossary). 
-
-Appendices describe various modifications to the system dynamics including mark-selective fishing (Appendix \@ref(app:msf)), fitness impacts on juvenile survival from genetic drift due to selection against hatchery traits in the natural environment (Appendix \@ref(app:fitness)), and multi-population models (Appendix \@ref(app:multi)).
-
-## Source code
-
-The corresponding R code is available on Github at [https://github.com/Blue-Matter/salmonMSE](https://github.com/Blue-Matter/salmonMSE).
-`ProjectSOM()` is the primary function that executes the projection and calls subsidiary functions that implement different components of the simulation (Table \@ref(tab:equation-table)).
-
-## Basic inputs and outputs
+# EXAMPLE CODE
 
 Users specify the parameters of the simulation through an S4 object of class `SOM`, which in itself is comprised of smaller S4 objects (class Bio, Habitat, Hatchery, or Harvest) that organize the biological dynamics and management levers:
 
