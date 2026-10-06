@@ -40,12 +40,17 @@ The equations are presented for salmonMSE version 3.1.0.
 The corresponding R code is available on Github at [https://github.com/Blue-Matter/salmonMSE](https://github.com/Blue-Matter/salmonMSE).
 `ProjectSOM()` is the primary function that executes the projection and calls subsidiary functions that implement different components of the simulation (Table \@ref(tab:equation-table)).
 
-The projection tool uses an operating model to simulate population trajectories and outcomes of management procedures, while incorporating feedback between the two at each timestep. 
+The projection tool uses an operating model to simulate population trajectories and outcomes of management procedures, while incorporating feedback between the two at each timestep (Figure \@ref(fig:overview)). 
 The operating model may be parameterized with data and outputs from historical modelling, or values drawn from expert knowledge or literature sources.
 The operating model is defined by five components, outlined below: biological, habitat, hatchery, harvest and historical.
 Outcomes can be summarized with a range of probabilistic performance metrics, such as the probability of exceeding spawner abundance reference points or PNI (proportionate natural influence) thresholds.
 salmonMSE can be of particular interest for modelling multiple populations co-mingling in mixed-stock fisheries, or interacting via straying. 
 In such cases, the components of the operating model can be defined and simulated across multiple populations simultaneously. 
+
+```{r overview, fig.width=6.5, fig.height=3, fig.cap="Conceptual diagram of the salmonMSE projection tool."}
+knitr::include_graphics(file.path("figures", "salmonMSE_flowchart_draft_v1_cropped.png"))
+```
+
 
 ## Biological
 
