@@ -48,7 +48,7 @@ salmonMSE can be of particular interest for modelling multiple populations co-mi
 In such cases, the components of the operating model can be defined and simulated across multiple populations simultaneously. 
 
 ```{r overview, fig.width=6.5, fig.height=3, fig.cap="Conceptual diagram of the salmonMSE projection tool."}
-knitr::include_graphics(file.path("figures", "salmonMSE_flowchart_draft_v1_cropped.png"))
+knitr::include_graphics(file.path("figures", "salmonMSE_flowchart_draft_v2_cropped.png"))
 ```
 
 
