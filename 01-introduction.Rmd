@@ -99,7 +99,7 @@ These can be either fixed values or posterior distributions from an estimation m
 # EXAMPLE CODE
 
 Users specify the parameters of the simulation through an S4 object of class `SOM`, which in itself is comprised of smaller S4 objects (class Bio, Habitat, Hatchery, or Harvest) that organize the biological dynamics and management levers. Generally, an S4 object is formal and structured representation of an object in R that contains slots that can also be S4 objects: 
-<!--CH comment: I tried to define S4 object above, please revise as needed. Also, I'm not sure whay Bio<-new("Bio") is included in the example below, but not the others. Can you remove that first line, or add in new Habitat, Hatchery, and Harvest objects?-->
+<!--CH comment: I tried to define S4 object above, please revise as needed. Also, I'm not sure whay Bio<-new("Bio") is included in the example below, but not the others. Can you  add in new Habitat, Hatchery, and Harvest objects, and describe how that line of code creates default objects that have default parameters for each component?-->
 
 ```{r, eval=FALSE, echo=TRUE}
 Bio <- new("Bio")

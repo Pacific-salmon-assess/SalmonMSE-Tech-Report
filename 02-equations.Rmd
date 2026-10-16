@@ -2,11 +2,22 @@
 # DYNAMICS EQUATIONS
 
 While the model is stochastic, the equations below describe the biological dynamics within a single simulation replicate.
-Variability among simulations is not described here because users have full control of stochastic, time-varying parameters.
-For example, users manually sample the desired probability density functions to generate Monte Carlo samples of a parameter, or specify the year-specific values of a parameter to create a temporal trend in a parameter.
+Variability among simulations is not described here because users have full control of stochastic, time-varying parameters. <!--CH comment: actually, we are limited to slots that allow for annual inputs, not all do. These are: Mjuv_NOS (Bio), Mjuv_NOS (Bio), SRdev (Bio), fry_sdev (Habitat), smolt_sdev (Habitat) as well as u_preterminal (Harvest) and u_terminal (Harvest).
+
+Note, the pre-spawn dens-dep relationship (Habitat) does not have random deviations, nor the egg incubation stage dens-dep relationship (Habitat).  
+Also, maturation rates do not have interannual variability, nor does the stray matrix.
+
+
+This may be fine for now (though interannual var in maturation would be great!), but I think we need to be clear about where we can add interannual variabilty, and were tweaks to the code are required before we can add it-->
+
+
+
+For example, users manually sample the desired probability density functions to generate Monte Carlo samples of a parameter, or specify the year-specific values of a parameter to create a temporal trend in a parameter. <!--CH: only for the parameters I listed above in my comment-->
 
 ## Juvenile marine abundance and pre-terminal fishery
+<!--CH comment: starting with juvenile abundances is fine, if we have an age-structured CM. However, this presumptoin may be dimissing for other simpler examples with only spawners and recruits. 
 
+Also, can we add a pgh or Appnedix that describes how a simulation without juvenile abundance data would be run?-->
 Let $N^\textrm{juv,NO}_{y,a}$ be the natural-origin (NO) juvenile abundance and $N^\textrm{juv,HO}_{y,a}$ be the hatchery-origin (HO) juvenile abundance of age $a$ at the beginning of the year $y$ (juveniles represent the abundance of each age class before returning as spawners).
 
 Harvest in the pre-terminal ($\textrm{PT}$) fishery of juveniles occurs in the first half of the year.
