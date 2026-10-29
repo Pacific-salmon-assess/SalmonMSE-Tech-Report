@@ -341,11 +341,11 @@ The smolt production is interpreted as the age-1 abundance in the following year
 If the smolt production is calculated from the Ricker spawner-recruit relationship, effectively over the entire freshwater life stage:
 
 \begin{align}
-  \textrm{Smolt}^\textrm{NOS}_{y+1} = \alpha \times \textrm{Egg}^\textrm{NOS}_{y}\times\exp(-\beta[\textrm{Egg}^\textrm{NOS}_{y} + \textrm{Egg}^\textrm{HOS}_{y}])  (\#eq:SmoltProdRicker1)\\
-  \textrm{Smolt}^\textrm{HOS}_{y+1} = \alpha \times \textrm{Egg}^\textrm{HOS}_{y}\times\exp(-\beta[\textrm{Egg}^\textrm{NOS}_{y} + \textrm{Egg}^\textrm{HOS}_{y}]) (\#eq:SmoltProdRicker2)
+  \textrm{Smolt}^\textrm{NOS}_{y+1} = \alpha \times \textrm{Egg}^\textrm{NOS}_{y}\times\exp(-\beta[\textrm{Egg}^\textrm{NOS}_{y} + \textrm{Egg}^\textrm{HOS}_{y}]) \times \varepsilon^\textrm{SR}_y (\#eq:SmoltProdRicker1)\\
+  \textrm{Smolt}^\textrm{HOS}_{y+1} = \alpha \times \textrm{Egg}^\textrm{HOS}_{y}\times\exp(-\beta[\textrm{Egg}^\textrm{NOS}_{y} + \textrm{Egg}^\textrm{HOS}_{y}]) \times \varepsilon^\textrm{SR}_y (\#eq:SmoltProdRicker2)
 \end{align}
 
-The density-independent component of the survival equation is controlled by $\alpha$ and the density-dependent component of survival is controlled by $\beta$ and scaled by the total egg production, where
+where $\varepsilon^\textrm{SR}$ is an annual deviation. The density-independent component of the survival equation is controlled by $\alpha$ and the density-dependent component of survival is controlled by $\beta$ and scaled by the total egg production, where
 
 \begin{align}
   \alpha &= \kappa/\phi\\
@@ -361,8 +361,8 @@ Salmon populations are typically modeled by a SRR that predicts the recruitment 
 Alternatively, the age-1 smolt production can be predicted from the Beverton-Holt spawner-recruit relationship as:
 
 \begin{align}
-\textrm{Smolt}^\textrm{NOS}_{y+1} = \frac{\alpha \times \textrm{Egg}^\textrm{NOS}_{y}}{1 + \beta(\textrm{Egg}^\textrm{NOS}_{y} + \textrm{Egg}^\textrm{HOS}_{y})} (\#eq:SmoltProdBH1)\\
-\textrm{Smolt}^\textrm{HOS}_{y+1} = \frac{\alpha \times \textrm{Egg}^\textrm{HOS}_{y}}{1 + \beta(\textrm{Egg}^\textrm{NOS}_{y} + \textrm{Egg}^\textrm{HOS}_{y})} (\#eq:SmoltProdBH2)
+\textrm{Smolt}^\textrm{NOS}_{y+1} = \frac{\alpha \times \textrm{Egg}^\textrm{NOS}_{y}}{1 + \beta(\textrm{Egg}^\textrm{NOS}_{y} + \textrm{Egg}^\textrm{HOS}_{y})} \varepsilon^\textrm{SR}_y (\#eq:SmoltProdBH1)\\
+\textrm{Smolt}^\textrm{HOS}_{y+1} = \frac{\alpha \times \textrm{Egg}^\textrm{HOS}_{y}}{1 + \beta(\textrm{Egg}^\textrm{NOS}_{y} + \textrm{Egg}^\textrm{HOS}_{y})} \varepsilon^\textrm{SR}_y (\#eq:SmoltProdBH2)
 \end{align}
 
 where $\alpha = \kappa/\phi$ and $\beta = \alpha/{C_\textrm{egg-smolt}}$.
