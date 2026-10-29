@@ -27,8 +27,7 @@ The equations are described in the following order:
 - Maturation and recruitment of the mature component of the population, followed by terminal fishing
 - Escapement from marine fisheries to the in-river return, where there is broodtake for hatchery programs and further in-river removals
 - Spawner abundance and egg production
-- Survival to outmigrating juveniles of the next generation in the next time step 
-<!--CH comment: can this be generalized to outmigrating juveniles, which can occur in the next time-step, or in two time-steps, if salmon stay in fw for 2 years?  Even if the model doesn't include it now, better to omit the age-step here, so that we can add it later.-->
+- Survival to outmigrating juveniles of the next generation
 - Advancement of age classes of juveniles that did not mature in the previous time step
 
 A glossary of important state variables is provided in Table \@ref(tab:glossary). 
@@ -39,8 +38,7 @@ Appendices describe various modifications to the system dynamics including mark-
 
 The equations are presented for salmonMSE version 3.1.0.
 The corresponding R code is available on Github at [https://github.com/Blue-Matter/salmonMSE](https://github.com/Blue-Matter/salmonMSE).
-`ProjectSOM()` is the primary function that executes the projection and calls subsidiary functions that implement different components of the simulation (Table \@ref(tab:equation-table)).
-<!--CH comment: Quang, if salmonMSE() is the wrapper function for PRojectSOM, should we use that one here?  Also, salmonMSE() is used below-->
+`salmonMSE()` is the user-facing function that executes the projection and calls internal functions that implement different components of the simulation (Table \@ref(tab:equation-table)).
 
 The projection tool uses an operating model to simulate population trajectories and outcomes of management procedures, while incorporating feedback between the two at each timestep (Figure \@ref(fig:overview)). 
 The operating model may be parameterized with data and outputs from historical modelling, or values drawn from expert knowledge or literature sources.
@@ -65,7 +63,6 @@ Under Hatchery Dynamics, we could add "and fitness impacts" given the statements
 
 The biological component of the operating model specifies the life history parameters of the modelled population(s), including longevity, survival, maturity, fecundity and spawner-recruit parameters.
 Survival rates include age-specific natural marine survival and en-route survival prior to spawning in freshwater.
-<!--CH: my preference is 'spawner-recruit' instead of stock-recruit everywhere. stock is a utilitarian word associated with fisheries, esp. commercial fisheries, and I prefer the biological word 'spawner' where possible.-->
 Spawner-recruit dynamics, used to model density-dependence from the egg to smolt life stages, can be specified through parameters of either a Ricker or Beverton-Holt model. 
 The model also contains the flexibility to model multiple life-history groups within a population that vary in natural survival and maturity (see @sorel2023 and @brown2026 for examples in Chinook salmon).
 
@@ -75,13 +72,13 @@ The habitat component contains freshwater survival parameters, used to model the
 Specifying the parameters here allows the user to partition density-dependence in freshwater across the transitions between the spawner, egg, fry and smolt life stages.
 Productivity and capacity parameters can be defined for either Beverton-Holt or hockey-stick relationships.
 Competition between hatchery releases and natural-origin fish can be modelled as well (see hatchery section below).
-Alternatively, freshwater survival survival can be modelled as random deviations independent of density. <!--CH comment: I added this last sentence, correct?-->
+Alternatively, freshwater survival survival can be modelled as random deviations independent of density.
 
 ## Hatchery
 
 The hatchery component defines parameters related to hatchery management, including hatchery releases and broodstock collection, as well as the characteristics of hatchery-origin fish, including fitness and survival rates that differ from those of natural-origin fish.
 The model allows the user to specify a target number of releases and desired proportion of natural-origin spawners in the brood, and calculates broodtake and resulting hatchery production using information on available spawners, fecundity and survival rates of brood and eggs. 
-Stray rates can also be included to represent inputs from and losses to other systems.<!-- CH comment: I added 'and losses to', correct?-->
+Stray rates can also be included to represent inputs from and losses to other systems.
 Multiple hatchery release strategies can be modelled, with different survival and maturity rates across strategies.
 
 ## Harvest
@@ -93,33 +90,44 @@ Mark-selective fisheries can also be implemented in either fishery, accounting f
 
 ## Historical
 
-The historical component contains the historical starting conditions to initialize the simulation.
-These can be either fixed values or posterior distributions from an estimation model.<!--CH: I  want to confirm that this box is about initializing the model with 1st year abundances from historical data, and not about parameterizing the OM from  historical data? I added 'to initalize' in the sentence above to make it more clear for me - and would like to confirm that is what was intended.-->
+The historical component contains the starting conditions to initialize the simulation.
+These can be either fixed values or posterior distributions from an estimation model.
 
 # EXAMPLE CODE
 
-Users specify the parameters of the simulation through an S4 object of class `SOM`, which in itself is comprised of smaller S4 objects (class Bio, Habitat, Hatchery, or Harvest) that organize the biological dynamics and management levers. Generally, an S4 object is formal and structured representation of an object in R that contains slots that can also be S4 objects: 
+Users specify the parameters of the simulation through an S4 object of class `SOM`.
+Generally, an S4 object in R has formally defined slots that facilitate validation to ensure the contents match declared types and other custom validity rules.
+
+A new `SOM` object is created first from generating smaller S4 objects (of class Bio, Habitat, Hatchery, Harvest, and Historical) that organize the biological dynamics and management levers and then stitching them together, as demonstrated below:
+
 <!--CH comment: I tried to define S4 object above, please revise as needed. Also, I'm not sure whay Bio<-new("Bio") is included in the example below, but not the others. Can you  add in new Habitat, Hatchery, and Harvest objects, and describe how that line of code creates default objects that have default parameters for each component?-->
 
 ```{r, eval=FALSE, echo=TRUE}
 Bio <- new("Bio")
+Habitat <- new("Habitat")
+Hatchery <- new("Hatchery")
+Harvest <- new("Harvest")
+Historical <- new("Historical")
 SOM <- new(
   "SOM",
   Bio,
   Habitat,
   Hatchery,
-  Harvest
+  Harvest,
+  Historical
 )
 ```
 
+The above code chunk creates a blank `SOM` object but defaults are defined to create a minimally operable example.
 The simulation of the projection model is run with a call to the `salmonMSE()` function:
 
 ```{r, eval=FALSE, echo=TRUE}
 SMSE <- salmonMSE(SOM)
 ```
 
-The output is another S4 object, of a class called 'SMSE', that reports the results of the projection.<!--CH: 'of the projection' not 'to the projection', correct?-->
-The contents of any S4 objects can be assigned or extracted  with the "@" symbol, for example, assigning the 'kappa', or productivity parameter within the Bio object, or extracting the projected time-series of natural-origin spawners, NOS, from the SMSE results object: <!--CH comment: I just added a description of the code below, to guide the reader a bit. Please revise as necessry -->
+The output is another S4 object of class `SMSE` that reports the results of the projection.
+The contents of any S4 object can be assigned or extracted with the "@" symbol.
+The below code chunk assigns the `kappa` slot containing the productivity parameter within the `Bio` object, and extracts the `NOS` slot from the `SMSE` object containing the projected time-series of natural-origin spawners:
 
 ```{r, eval=FALSE, echo=TRUE}
 Bio@kappa <- 3
@@ -146,9 +154,6 @@ flextable(glossary) %>%
 
 \newpage
 
-
-<!--CH comment: Is this is a good place to describe the difference between ProjecSOM(), in the first line of the table, vs salmonMSE() used in the code example above? Or should we keep it consistent through the entire Intro?-->
-
 ```{r equation-table, results="asis"} 
 #Equations <- read.csv("tables/EquationTable.csv")
 #flextable(Equations) |>
@@ -159,7 +164,7 @@ flextable(glossary) %>%
 
 table_func <- data.frame(
   Description = c("Entire projection", "Juvenile natural production (no habitat modeling)", "Juvenile natural production (with habitat modeling)", "Hatchery production", "Preterminal fishery", "Terminal fishery", "Spawners", "Fitness"),
-  Function = c("ProjectSOM()", "nextgen_SRR_func()", "nextgen_habitat_func()", 
+  Function = c("salmonMSE()", "nextgen_SRR_func()", "nextgen_habitat_func()", 
                "brood_func()", "catch_func()", "catch_func()", "calc_spawners()", "fitness_func()")
 )
 

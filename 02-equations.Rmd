@@ -322,9 +322,9 @@ We consider natural production in the absence of fitness effects arising from ha
 Modified equations accounting for fitness are described in Appendix \@ref(app:fitness).
 
 The outmigrating juveniles of the next generation is predicted from the spawners from the previous year.
-Two parameterizations are possible: (1) a single density-dependent stock-recruit relationship (SRR) is used model egg-juvenile survival, or (2) a series of density-dependent functions models survival at intermittent freshwater life stages.
+Two parameterizations are possible: (1) a single density-dependent spawner-recruit relationship (SRR) is used model egg-juvenile survival, or (2) a series of density-dependent functions models survival at intermittent freshwater life stages.
 
-_Parameterization 1: Juvenile production from single stock-recruit relationship_
+_Parameterization 1: Juvenile production from single spawner-recruit relationship_
 
 Egg production is calculated as
 
@@ -338,7 +338,7 @@ Egg production is calculated as
 where $\textrm{HOS}_{\textrm{eff}} = \gamma \times \textrm{HOS}$, $p^\textrm{female}$ is the proportion female, $\textrm{Fec}$ is fecundity, and superscripts denote the parentage of the progeny.
 
 The smolt production is interpreted as the age-1 abundance in the following year $y+1$.
-If the smolt production is calculated from the Ricker stock-recruit relationship, effectively over the entire freshwater life stage:
+If the smolt production is calculated from the Ricker spawner-recruit relationship, effectively over the entire freshwater life stage:
 
 \begin{align}
   \textrm{Smolt}^\textrm{NOS}_{y+1} = \alpha \times \textrm{Egg}^\textrm{NOS}_{y}\times\exp(-\beta[\textrm{Egg}^\textrm{NOS}_{y} + \textrm{Egg}^\textrm{HOS}_{y}])  (\#eq:SmoltProdRicker1)\\
@@ -358,7 +358,7 @@ The density-independent component of the survival equation is controlled by $\al
 $\kappa$ is the productivity (returns/spawner), $\phi$ is the egg production per smolt at replacement over the lifetime of a brood year, and $\tau$ is the female spawner per smolt at replacement. 
 Salmon populations are typically modeled by a SRR that predicts the recruitment (returning adults) from the number of spawners. Parameters $\tau$ and $\phi$ allow conversion of a spawner-return SRR to an equivalent egg-juvenile SRR that predicts the returns/spawner specified in $\kappa$.
 
-Alternatively, the age-1 smolt production can be predicted from the Beverton-Holt stock-recruit relationship as:
+Alternatively, the age-1 smolt production can be predicted from the Beverton-Holt spawner-recruit relationship as:
 
 \begin{align}
 \textrm{Smolt}^\textrm{NOS}_{y+1} = \frac{\alpha \times \textrm{Egg}^\textrm{NOS}_{y}}{1 + \beta(\textrm{Egg}^\textrm{NOS}_{y} + \textrm{Egg}^\textrm{HOS}_{y})} (\#eq:SmoltProdBH1)\\

@@ -129,7 +129,7 @@ Fitness can reduce survival in the egg, fry, and juvenile marine life stages.
 
 If a single egg-juvenile survival function is used, then the egg-juvenile survival is reduced by the fitness loss function over the egg and fry life stage.
 
-In the Ricker stock-recruit function, $\alpha$ and $\beta$ are modified as:
+In the Ricker spawner-recruit function, $\alpha$ and $\beta$ are modified as:
 
 \begin{align}
   \textrm{Smolt}^\textrm{NOS}_{y+1} = \alpha'_{y+1} \times \textrm{Fry}^\textrm{NOS}_{y+1} \exp(-\beta'_{y+1}(\textrm{Fry}^\textrm{NOS}_{y+1} + \textrm{Fry}^\textrm{HOS}_{y+1})) (\#eq:SmoltProdFitnessRicker1)\\
