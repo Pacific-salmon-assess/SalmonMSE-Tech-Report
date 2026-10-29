@@ -42,7 +42,7 @@ If management is by target harvest rate for the preterminal and terminal fisheri
 
 \begin{align}
   u^\textrm{PT}_y = \frac{\sum_aK^\textrm{HO,PT}_{y,a}\times \textrm{AEQ}_a}{\sum_a(K^\textrm{HO,PT}_{y,a} \times \textrm{AEQ}_a + N^\textrm{juv,HO}_{y,a}\exp(-v^\textrm{PT}_a [F^\textrm{kept,HO,PT}_y + F^\textrm{rel,HO,PT}_y])\times r_a)} (\#eq:HarvTargetMSFPT)\\
-  u^\textrm{T}_y = \frac{\sum_aK^\textrm{HO,T}_{y,a}}{R^\textrm{HO}_{y,a}}
+  u^\textrm{T}_y = \frac{\sum_aK^\textrm{HO,T}_{y,a}}{\sum_aR^\textrm{HO}_{y,a}}
   (\#eq:HarvTargetMSFT)
 \end{align}
 

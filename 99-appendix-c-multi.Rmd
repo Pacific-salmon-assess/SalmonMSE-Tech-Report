@@ -59,7 +59,7 @@ K^\textrm{HO,PT}_{y,a,s} = \left(1 - \exp(-v^\textrm{PT}_{a,s} F^\textrm{PT}_y)\
 Similarly, from a specified harvest rate of the terminal fishery $u^\textrm{T}_y$, the corresponding instantaneous fishing mortality rate $F^\textrm{T}_y$ satisfies:
 
 \begin{equation}
-u^\textrm{T}_y = \frac{\sum_a(K^\textrm{NO,T}_{y,a,s} + K^\textrm{HO,T}_{y,a,s})}{\sum_a(R^\textrm{NO}_{y,a,s} + R^\textrm{HO}_{y,a,s})}
+u^\textrm{T}_y = \frac{\sum_a\sum_s(K^\textrm{NO,T}_{y,a,s} + K^\textrm{HO,T}_{y,a,s})}{\sum_a\sum_s(R^\textrm{NO}_{y,a,s} + R^\textrm{HO}_{y,a,s})}
 (\#eq:TFMultiPop)
 \end{equation}
 
