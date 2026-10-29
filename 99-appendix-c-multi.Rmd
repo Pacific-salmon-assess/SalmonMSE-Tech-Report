@@ -39,7 +39,7 @@ One can evaluate the performance of harvest strategies for a single mixed-stock 
 For example, smaller or less productive biological units may be choke points and there are objectives to ensure the sustainability of small or less productive population units.
 What harvest rates aggregated over the fishery unit can ensure the sustainability of a low productivity population unit?
 
-Mixed-stock fisheries are possible for either the preterminal or terminal fishery:
+Mixed-stock fisheries are possible for either the preterminal or terminal fishery.
 
 From a specified harvest rate $u^\textrm{PT}_y$, the instantaneous fishing mortality rate $F^\textrm{PT}_y$ (related to fishing intensity of the preterminal fishery) is solved such that:
 

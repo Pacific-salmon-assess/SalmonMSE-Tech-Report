@@ -1,0 +1,26 @@
+\newpage
+
+# APPENDIX `r new_appendix()`. PARAMETERIZING SPAWNER-RECRUIT MODELS {#app:simple-model}
+
+This appendix describes the parameters needed to simplify the projection to a spawner-recruit model with no hatchery production. 
+
+Using the notation from the main text and maintaining the age-structured accounting, the natural-origin spawners (NOS) in year $y$ of age $A$ predict the single brood-year return $R$ in year $y+A$ with the Ricker function:
+
+\begin{equation}
+R^\textrm{NO}_{y+A,A} = \kappa \times \textrm{NOS}_{y,A}\times\exp\left(\dfrac{-\textrm{NOS}_{y,A}}{S_\textrm{max}}\right)\times\varepsilon^\textrm{SR}_y (\#eq:SRR)
+\end{equation}
+
+where $\kappa$ is productivity, $S_\textrm{max}$ is the spawner abundance that maximizes recruitment, and $\varepsilon$ is process error.
+
+To implement Equation \@ref(eq:SRR), the following parameters are specified:
+
+1. Set $u^\textrm{PT,target}_y = 0$ and $K^\textrm{PT,target}_y = 0$ (no preterminal fishery) in equations \@ref(eq:PretermHarvestRate)--\@ref(eq:PretermCatchTargetCustom)
+2. Set $M^\textrm{NO}_{y,a} = 0$ for all ages in equation \@ref(eq:JuvAbundNOnext)
+3. Set $r_{y,a} = 0$ for ages $a = 1,\ldots,A-1$ and $r_{y,a} = 1$ for $a=A$ in equations \@ref(eq:RecruitmentNO)
+4. Set $n^\textrm{yearling}_\textrm{target} = 0$ and $n^\textrm{subyearling}_\textrm{target} = 0$ in equation \@ref(eq:EggTarget)
+5. Set $s_\textrm{enroute} = 1$ in equation \@ref(eq:NOS)
+6. Set $p^\textrm{female}_a = 1$ and $\textrm{Fec}_{y,a} = 1$ in equation \@ref(eq:SpawnOutput1)
+
+With the modifications in Steps 2--6, Equation \@ref(eq:SmoltProdRicker1) simplifies to Equation \@ref(eq:SRR), where $\alpha = \kappa$ and $\beta = 1/S_\textrm{max}$ because $\phi=1$ and $\tau = 1$.
+
+Additionally, the egg production is the spawner abundance ($\textrm{Egg}^\textrm{NOS}_y = \textrm{NOS}_{y,A}$), the smolt production is equal to the return ($\textrm{Smolt}^\textrm{NOS}_{y+1} = R^\textrm{NO}_{y+A,A}$), and juvenile abundance is equal to the return ($N^\textrm{juv,NO}_{y+j,j} = R^\textrm{NO}_{y+A,A}$ for all $j = 1,\ldots,A$).

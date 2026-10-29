@@ -14,11 +14,19 @@ This may be fine for now (though interannual var in maturation would be great!),
 
 For example, users manually sample the desired probability density functions to generate Monte Carlo samples of a parameter, or specify the year-specific values of a parameter to create a temporal trend in a parameter. <!--CH: only for the parameters I listed above in my comment-->
 
-## Juvenile marine abundance and pre-terminal fishery
-<!--CH comment: starting with juvenile abundances is fine, if we have an age-structured CM. However, this presumptoin may be dimissing for other simpler examples with only spawners and recruits. 
+## Model initialization
 
-Also, can we add a pgh or Appnedix that describes how a simulation without juvenile abundance data would be run?-->
-Let $N^\textrm{juv,NO}_{y,a}$ be the natural-origin (NO) juvenile abundance and $N^\textrm{juv,HO}_{y,a}$ be the hatchery-origin (HO) juvenile abundance of age $a$ at the beginning of the year $y$ (juveniles represent the abundance of each age class before returning as spawners).
+The projection can be initialized in two ways. 
+
+First, the juvenile abundance at age is specified in year 1, i.e., $N^\textrm{juv,NO}_{y=1,a}$ and $N^\textrm{juv,HO}_{y=1,a}$, where $N^\textrm{juv,NO}_{y,a}$ is the natural-origin (NO) juvenile abundance and $N^\textrm{juv,HO}_{y,a}$ is the hatchery-origin (HO) juvenile abundance of age $a$ at the beginning of the year $y$ (juveniles represent the abundance of each age class before returning as spawners).
+
+Second, the escapement at the oldest age class ($A$) specified in year 1, i.e., $E^\textrm{NO}_{y=1,a=A}$ and  $E^\textrm{HO}_{y=1,a=A}$ (see Escapement section further below).
+No marine fisheries operate in the first year.
+The second method is useful for setting up a simpler spawner-recruit model (Appendix \@ref(app:simple-model)).
+
+## Juvenile marine abundance and pre-terminal fishery
+
+At the beginning of the annual time step, the juvenile abundance $N^\textrm{juv,NO}_{y,a}$ and $N^\textrm{juv,HO}_{y,a}$ are either specified at the beginning of the projection, or calculated from survival from the previous year or from natural and hatchery production in freshwater.
 
 Harvest in the pre-terminal ($\textrm{PT}$) fishery of juveniles occurs in the first half of the year.
 Assuming no mark-selective fishing, the kept catch $K$ is
@@ -78,8 +86,8 @@ Modifications for mixed-stock fisheries are described in Appendix \@ref(app:mult
 The juvenile abundance in the next year $y+1$ consists of fish that survived preterminal exploitation, did not mature, and survived natural mortality:
 
 \begin{align}
- N^\textrm{juv,NO}_{y+1,a+1} = N^\textrm{juv,NO}_{y,a}\exp\left(-[v^\textrm{PT}_aF^\textrm{PT}_y + M^\textrm{NO}_{y,a}]\right)(1 - r_{y,a}) (\#eq:JuvAbundNOnext)\\
- N^\textrm{juv,HO}_{y+1,a+1} = N^\textrm{juv,HO}_{y,a}\exp\left(-[v^\textrm{PT}_aF^\textrm{PT}_y + M^\textrm{HO}_{y,a}]\right)(1 - r_{y,a}) (\#eq:JuvAbundHOnext)
+ N^\textrm{juv,NO}_{y+1,a+1} &= N^\textrm{juv,NO}_{y,a}\exp\left(-[v^\textrm{PT}_aF^\textrm{PT}_y + M^\textrm{NO}_{y,a}]\right)(1 - r_{y,a}) (\#eq:JuvAbundNOnext)\\
+ N^\textrm{juv,HO}_{y+1,a+1} &= N^\textrm{juv,HO}_{y,a}\exp\left(-[v^\textrm{PT}_aF^\textrm{PT}_y + M^\textrm{HO}_{y,a}]\right)(1 - r_{y,a}) (\#eq:JuvAbundHOnext)
 \end{align}
 
 ## Recruitment and terminal fishery

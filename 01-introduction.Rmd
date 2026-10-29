@@ -10,6 +10,8 @@ To accommodate more complex life histories, salmonMSE is age-structured which is
 salmonMSE also explicitly models juvenile mortality in freshwater and marine life stage, where this information is available.
 Importantly, salmonMSE was developed to comprehensively support evaluation of harvest policies, hatchery enhancement programs, and changes in early freshwater survival, e.g., due to habitat modifications, simultaneously.
 Finally, stochasticity can be incorporated in the model to evaluate outcomes across uncertain parameters.
+
+A typical application is not likely to use all available features in salmonMSE.
 In general, its flexibility is intended to encapsulate a gradient of simple to more complex models as data availability to inform parameters allows.
 
 salmonMSE can be used to address questions such as:
@@ -32,7 +34,8 @@ The equations are described in the following order:
 
 A glossary of important state variables is provided in Table \@ref(tab:glossary). 
 
-Appendices describe various modifications to the system dynamics including mark-selective fishing (Appendix \@ref(app:msf)), fitness impacts on juvenile survival from genetic drift due to selection against hatchery traits in the natural environment (Appendix \@ref(app:fitness)), and multi-population models (Appendix \@ref(app:multi)).
+Appendices describe various modifications to the system dynamics, including mark-selective fishing (Appendix \@ref(app:msf)), fitness impacts on juvenile survival from genetic drift due to selection against hatchery traits in the natural environment (Appendix \@ref(app:fitness)), and multi-population models (Appendix \@ref(app:multi)).
+Appendix \@ref(app:simple-model) describes the biological parameters needed for a simple spawner and recruit model.
 
 # MODEL OVERVIEW
 
