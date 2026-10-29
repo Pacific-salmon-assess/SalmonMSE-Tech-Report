@@ -505,13 +505,13 @@ After the hatchery egg production is calculated, the production of yearlings and
   (\#eq:Pyearling4)
 \end{align}
 
+<!--
 Assuming no density-dependent competition with natural-origin juveniles, the outmigrating releases ("smolt releases") is
 
 \begin{equation}
 \textrm{Smolt}^\textrm{Rel}_{y+1} = n^\textrm{subyearling}_{y+1} + n^\textrm{yearling}_{y+1} (\#eq:SmoltRel)
 \end{equation}
 
-<!--
 With competition, the outmigrating abundance is:
 
 $$
@@ -531,8 +531,10 @@ The projection continues in the next year $y+1$ by setting the age-1 juvenile ab
 
 \begin{align}
 N^\textrm{juv,NO}_{y+1,a=1} &= \textrm{Smolt}^\textrm{NOS}_{y+1} + \textrm{Smolt}^\textrm{HOS}_{y+1} (\#eq:NNOnext)\\
-N^\textrm{juv,HO}_{y+1,a=1} &= \textrm{Smolt}^\textrm{Rel}_{y+1} (\#eq:NHOnext)
+N^\textrm{juv,HO}_{y+1,a=1} &= n^\textrm{subyearling}_{y+1} \times s_\textrm{sub-smolt} + n^\textrm{yearling}_{y+1} \times s_\textrm{year-smolt} (\#eq:NHOnext)
 \end{align}
+
+where $s_\textrm{sub-smolt}$ and $s_\textrm{year-smolt}$ is smolting survival after release.
 
 # DERIVED QUANTITIES
 

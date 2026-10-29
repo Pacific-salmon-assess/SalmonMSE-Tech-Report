@@ -16,7 +16,7 @@ To implement Equation \@ref(eq:SRR), the following parameters are specified:
 
 1. Set $u^\textrm{PT,target}_y = 0$ and $K^\textrm{PT,target}_y = 0$ (no preterminal fishery) in equations \@ref(eq:PretermHarvestRate)--\@ref(eq:PretermCatchTargetCustom)
 2. Set $M^\textrm{NO}_{y,a} = 0$ for all ages in equation \@ref(eq:JuvAbundNOnext)
-3. Set $r_{y,a} = 0$ for ages $a = 1,\ldots,A-1$ and $r_{y,a} = 1$ for $a=A$ in equations \@ref(eq:RecruitmentNO)
+3. Set $r_{y,a} = 0$ for ages $a = 1,\ldots,A-1$ and $r_{y,a} = 1$ for $a=A$ in equation \@ref(eq:RecruitmentNO)
 4. Set $n^\textrm{yearling}_\textrm{target} = 0$ and $n^\textrm{subyearling}_\textrm{target} = 0$ in equation \@ref(eq:EggTarget)
 5. Set $s_\textrm{enroute} = 1$ in equation \@ref(eq:NOS)
 6. Set $p^\textrm{female}_a = 1$ and $\textrm{Fec}_{y,a} = 1$ in equation \@ref(eq:SpawnOutput1)

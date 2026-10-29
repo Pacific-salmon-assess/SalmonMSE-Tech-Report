@@ -62,6 +62,8 @@ pyearling,p_\textrm{yearling},Proportion of hatchery releases as yearling (vs. s
 r,r,Proportion mature at age,Input,Input,"SOM@Bio@p_mature, SOM@Hatchery@p_mature_HOS"
 r,R,Return,Output,Output,"SMSE@Return_NOS, SMSE@Return_HOS"
 senroute,s_\textrm{enroute},Survival of escapement to spawning grounds and hatchery,Input,Input,SOM@Bio@s_enroute
+ssubsmolt,s_\textrm{sub-smolt},Survival of subyearling releases after smolting,Input,Input,SOM@Hatchery@s_sub_smolt
+syearsmolt,s_\textrm{year-smolt},Survival of yearling releases after smolting,Input,Input,SOM@Hatchery@s_year_smolt
 sigma,\sigma^2,Variance of phenotypic traits in population,Fitness,Input,SOM@Hatchery@phenotype_variance
 smax,S_\textrm{max},Spawner abundance that maximizes recruitment (Ricker spawner-recruit parameter),Input,Input,SOM@Bio@Smax
 smolthos,\textrm{Smolt}^\textrm{HOS},Natural smolt production by hatchery-origin spawners,Output,Output,SMSE@Smolt_HOS
