@@ -24,3 +24,6 @@ To implement Equation \@ref(eq:SRR), the following parameters are specified:
 With the modifications in Steps 2--6, Equation \@ref(eq:SmoltProdRicker1) simplifies to Equation \@ref(eq:SRR), where $\alpha = \kappa$ and $\beta = 1/S_\textrm{max}$ because $\phi=1$ and $\tau = 1$.
 
 Additionally, the egg production is the spawner abundance ($\textrm{Egg}^\textrm{NOS}_y = \textrm{NOS}_{y,A}$), the smolt production is equal to the return ($\textrm{Smolt}^\textrm{NOS}_{y+1} = R^\textrm{NO}_{y+A,A}$), and juvenile abundance is equal to the return ($N^\textrm{juv,NO}_{y+j,j} = R^\textrm{NO}_{y+A,A}$ for all $j = 1,\ldots,A$).
+
+<!--CH: consider addding the following....-->
+In some cases, fecundity and enroute mortality can be set to values other than 1, representing changes in population demographics [@STATON20211755].

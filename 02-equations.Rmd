@@ -20,13 +20,11 @@ The projection can be initialized in two ways.
 
 First, the juvenile abundance at age is specified in year 1, i.e., $N^\textrm{juv,NO}_{y=1,a}$ and $N^\textrm{juv,HO}_{y=1,a}$, where $N^\textrm{juv,NO}_{y,a}$ is the natural-origin (NO) juvenile abundance and $N^\textrm{juv,HO}_{y,a}$ is the hatchery-origin (HO) juvenile abundance of age $a$ at the beginning of the year $y$ (juveniles represent the abundance of each age class before returning as spawners).
 
-Second, the escapement at the oldest age class ($A$) specified in year 1, i.e., $E^\textrm{NO}_{y=1,a=A}$ and  $E^\textrm{HO}_{y=1,a=A}$ (see Escapement section further below).
+Second, the escapement at the oldest age class ($A$) can be specified in year 1, i.e., $E^\textrm{NO}_{y=1,a=A}$ and  $E^\textrm{HO}_{y=1,a=A}$ (see Escapement section further below).
 No marine fisheries operate in the first year.
 The second method is useful for setting up a simpler spawner-recruit model (Appendix \@ref(app:simple-model)).
 
 ## Juvenile marine abundance and pre-terminal fishery
-<!--CH comment:  
-can we  please add a pgh or Appendix that describes how a simulation without juvenile abundance data would be run, i.e., describing what is int article  for simpleSOM() : https://docs.salmonmse.com/articles/simpleSOM.html?  Perhpas this was added in the recent updates?-->
 
 At the beginning of the annual time step, the juvenile abundance $N^\textrm{juv,NO}_{y,a}$ and $N^\textrm{juv,HO}_{y,a}$ are either specified at the beginning of the projection, or calculated from survival from the previous year or from natural and hatchery production in freshwater.
 
@@ -587,7 +585,7 @@ where
   \textrm{pHOS}_{y,a} = \dfrac{\textrm{Fec}_a \times \textrm{HOS}_{y,a}}{\sum_a{\textrm{Fec}_a (\textrm{NOS}_{y,a}} + \textrm{HOS}_{y,a})} (\#eq:pWildHO)
 \end{align}
 
-In equations \@ref(eq:pWildNO) and \@ref(eq:pWildHO), the probability of finding a wild spawner in year $y$ is the sum of probabilities of finding a wild salmon over all ages.
+In equations \@ref(eq:pWildNO) and \@ref(eq:pWildHO), <!--CH I think this should be \@ref(eq:pWildbrood) instead of, in addition to these 2 equations, correct?-->the probability of finding a wild spawner in year $y$ is the sum of probabilities of finding a wild salmon over all ages.
 For each age $a$, the first ratio is the probability of finding a natural-origin spawner in year $y$.
 The second ratio is the probability of mating success from two parental natural-origin spawners in year $y-a$ using a Punnett square, assuming non-assortative mating across age and origin.
 The summation across dummy age variable $a'$ calculates the total proportion of spawners in a given year.
@@ -603,7 +601,7 @@ PNI (proportionate natural influence) is an approximation of the rate of gene fl
 
 Generally, a combination of minimizing hatchery releases, increasing natural broodtake, and reducing the number hatchery origin spawners maintains high PNI, i.e., low rate of gene flow from the hatchery to natural environment.
 
-If there is no natural-origin brood, e.g., brood is imported or there are only strays, then PNI is calculated with equation 6 of @withler2018:
+If there are no natural-origin brood, e.g., brood is imported or there are only strays, then PNI is calculated with equation 6 of @withler2018:
 
 \begin{equation}
  \textrm{PNI}_{y+1} = \dfrac{h^2}{h^2 + (1 - h^2 + \omega^2) \textrm{pHOSeff}_y}
