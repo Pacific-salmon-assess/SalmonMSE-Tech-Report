@@ -13,11 +13,22 @@ I think we need to be clear about where users can add interannual variabilty, an
 
 For example, users manually sample the desired probability density functions to generate Monte Carlo samples of a parameter, or specify the year-specific values of a parameter to create a temporal trend in a parameter. <!--CH: only for the parameters I listed above in my comment-->
 
-## Juvenile marine abundance and pre-terminal fishery
-<!--CH comment: starting with juvenile abundances is fine, if we have an age-structured CM. However, this assumption may be dismissing for other simpler examples with only spawners and recruits. 
 
-Also, can we  please add a pgh or Appendix that describes how a simulation without juvenile abundance data would be run, i.e., describing what is int article  for simpleSOM() : https://docs.salmonmse.com/articles/simpleSOM.html?-->
-Let $N^\textrm{juv,NO}_{y,a}$ be the natural-origin (NO) juvenile abundance and $N^\textrm{juv,HO}_{y,a}$ be the hatchery-origin (HO) juvenile abundance of age $a$ at the beginning of the year $y$ (juveniles represent the abundance of each age class before returning as spawners).
+## Model initialization
+
+The projection can be initialized in two ways. 
+
+First, the juvenile abundance at age is specified in year 1, i.e., $N^\textrm{juv,NO}_{y=1,a}$ and $N^\textrm{juv,HO}_{y=1,a}$, where $N^\textrm{juv,NO}_{y,a}$ is the natural-origin (NO) juvenile abundance and $N^\textrm{juv,HO}_{y,a}$ is the hatchery-origin (HO) juvenile abundance of age $a$ at the beginning of the year $y$ (juveniles represent the abundance of each age class before returning as spawners).
+
+Second, the escapement at the oldest age class ($A$) specified in year 1, i.e., $E^\textrm{NO}_{y=1,a=A}$ and  $E^\textrm{HO}_{y=1,a=A}$ (see Escapement section further below).
+No marine fisheries operate in the first year.
+The second method is useful for setting up a simpler spawner-recruit model (Appendix \@ref(app:simple-model)).
+
+## Juvenile marine abundance and pre-terminal fishery
+<!--CH comment:  
+can we  please add a pgh or Appendix that describes how a simulation without juvenile abundance data would be run, i.e., describing what is int article  for simpleSOM() : https://docs.salmonmse.com/articles/simpleSOM.html?  Perhpas this was added in the recent updates?-->
+
+At the beginning of the annual time step, the juvenile abundance $N^\textrm{juv,NO}_{y,a}$ and $N^\textrm{juv,HO}_{y,a}$ are either specified at the beginning of the projection, or calculated from survival from the previous year or from natural and hatchery production in freshwater.
 
 Harvest in the pre-terminal ($\textrm{PT}$) fishery of juveniles occurs in the first half of the year.
 Assuming no mark-selective fishing, the kept catch $K$ is
@@ -79,8 +90,8 @@ Modifications for mixed-stock fisheries are described in Appendix \@ref(app:mult
 The juvenile abundance in the next year $y+1$ consists of fish that survived preterminal exploitation, did not mature, and survived natural mortality:
 
 \begin{align}
- N^\textrm{juv,NO}_{y+1,a+1} = N^\textrm{juv,NO}_{y,a}\exp\left(-[v^\textrm{PT}_aF^\textrm{PT}_y + M^\textrm{NO}_{y,a}]\right)(1 - r_{y,a}) (\#eq:JuvAbundNOnext)\\
- N^\textrm{juv,HO}_{y+1,a+1} = N^\textrm{juv,HO}_{y,a}\exp\left(-[v^\textrm{PT}_aF^\textrm{PT}_y + M^\textrm{HO}_{y,a}]\right)(1 - r_{y,a}) (\#eq:JuvAbundHOnext)
+ N^\textrm{juv,NO}_{y+1,a+1} &= N^\textrm{juv,NO}_{y,a}\exp\left(-[v^\textrm{PT}_aF^\textrm{PT}_y + M^\textrm{NO}_{y,a}]\right)(1 - r_{y,a}) (\#eq:JuvAbundNOnext)\\
+ N^\textrm{juv,HO}_{y+1,a+1} &= N^\textrm{juv,HO}_{y,a}\exp\left(-[v^\textrm{PT}_aF^\textrm{PT}_y + M^\textrm{HO}_{y,a}]\right)(1 - r_{y,a}) (\#eq:JuvAbundHOnext)
 \end{align}
 
 ## Recruitment and terminal fishery
@@ -324,9 +335,9 @@ We consider natural production in the absence of fitness effects arising from ha
 Modified equations accounting for fitness are described in Appendix \@ref(app:fitness).
 
 The outmigrating juveniles of the next generation is predicted from the spawners from the previous year.
-Two parameterizations are possible: (1) a single density-dependent stock-recruit relationship (SRR) is used model egg-juvenile survival, or (2) a series of density-dependent functions models survival at intermittent freshwater life stages.
+Two parameterizations are possible: (1) a single density-dependent spawner-recruit relationship (SRR) is used model egg-juvenile survival, or (2) a series of density-dependent functions models survival at intermittent freshwater life stages.
 
-_Parameterization 1: Juvenile production from single stock-recruit relationship_
+_Parameterization 1: Juvenile production from single spawner-recruit relationship_
 
 Egg production is calculated as
 
@@ -340,14 +351,15 @@ Egg production is calculated as
 where $\textrm{HOS}_{\textrm{eff}} = \gamma \times \textrm{HOS}$, $p^\textrm{female}$ is the proportion female, $\textrm{Fec}$ is fecundity, $\gamma$ is reduced reproductive success of HOS relative to NOS, and superscripts denote the parentage of the progeny.
 
 The smolt production is interpreted as the age-1 abundance in the following year $y+1$. <!--CH: can we add a sentence about how equations work if smolt production occurs in year 2 instaed of year 1?-->
-If the smolt production is calculated from the Ricker stock-recruit relationship, effectively over the entire freshwater life stage:
+If the smolt production is calculated from the Ricker spawner-recruit relationship, effectively over the entire freshwater life stage:
+
 
 \begin{align}
-  \textrm{Smolt}^\textrm{NOS}_{y+1} = \alpha \times \textrm{Egg}^\textrm{NOS}_{y}\times\exp(-\beta[\textrm{Egg}^\textrm{NOS}_{y} + \textrm{Egg}^\textrm{HOS}_{y}])  (\#eq:SmoltProdRicker1)\\
-  \textrm{Smolt}^\textrm{HOS}_{y+1} = \alpha \times \textrm{Egg}^\textrm{HOS}_{y}\times\exp(-\beta[\textrm{Egg}^\textrm{NOS}_{y} + \textrm{Egg}^\textrm{HOS}_{y}]) (\#eq:SmoltProdRicker2)
+  \textrm{Smolt}^\textrm{NOS}_{y+1} = \alpha \times \textrm{Egg}^\textrm{NOS}_{y}\times\exp(-\beta[\textrm{Egg}^\textrm{NOS}_{y} + \textrm{Egg}^\textrm{HOS}_{y}]) \times \varepsilon^\textrm{SR}_y (\#eq:SmoltProdRicker1)\\
+  \textrm{Smolt}^\textrm{HOS}_{y+1} = \alpha \times \textrm{Egg}^\textrm{HOS}_{y}\times\exp(-\beta[\textrm{Egg}^\textrm{NOS}_{y} + \textrm{Egg}^\textrm{HOS}_{y}]) \times \varepsilon^\textrm{SR}_y (\#eq:SmoltProdRicker2)
 \end{align}
 
-The density-independent component of the survival equation is controlled by $\alpha$ and the density-dependent component of survival is controlled by $\beta$ and scaled by the total egg production, where
+where $\varepsilon^\textrm{SR}$ is an annual deviation. The density-independent component of the survival equation is controlled by $\alpha$ and the density-dependent component of survival is controlled by $\beta$ and scaled by the total egg production, where
 
 \begin{align}
   \alpha &= \kappa/\phi\\
@@ -360,11 +372,11 @@ The density-independent component of the survival equation is controlled by $\al
 $\kappa$ is the productivity (returns/spawner), $\phi$ is the egg production per smolt at replacement over the lifetime of a brood year, and $\tau$ is the female spawner per smolt at replacement. 
 Salmon populations are typically modeled by a SRR that predicts the recruitment (returning adults) from the number of spawners. Parameters $\tau$ and $\phi$ allow conversion of a spawner-return SRR to an equivalent egg-juvenile SRR that predicts the returns/spawner specified in $\kappa$.
 
-Alternatively, the age-1 smolt production can be predicted from the Beverton-Holt stock-recruit relationship as:
+Alternatively, the age-1 smolt production can be predicted from the Beverton-Holt spawner-recruit relationship as:
 
 \begin{align}
-\textrm{Smolt}^\textrm{NOS}_{y+1} = \frac{\alpha \times \textrm{Egg}^\textrm{NOS}_{y}}{1 + \beta(\textrm{Egg}^\textrm{NOS}_{y} + \textrm{Egg}^\textrm{HOS}_{y})} (\#eq:SmoltProdBH1)\\
-\textrm{Smolt}^\textrm{HOS}_{y+1} = \frac{\alpha \times \textrm{Egg}^\textrm{HOS}_{y}}{1 + \beta(\textrm{Egg}^\textrm{NOS}_{y} + \textrm{Egg}^\textrm{HOS}_{y})} (\#eq:SmoltProdBH2)
+\textrm{Smolt}^\textrm{NOS}_{y+1} = \frac{\alpha \times \textrm{Egg}^\textrm{NOS}_{y}}{1 + \beta(\textrm{Egg}^\textrm{NOS}_{y} + \textrm{Egg}^\textrm{HOS}_{y})} \varepsilon^\textrm{SR}_y (\#eq:SmoltProdBH1)\\
+\textrm{Smolt}^\textrm{HOS}_{y+1} = \frac{\alpha \times \textrm{Egg}^\textrm{HOS}_{y}}{1 + \beta(\textrm{Egg}^\textrm{NOS}_{y} + \textrm{Egg}^\textrm{HOS}_{y})} \varepsilon^\textrm{SR}_y (\#eq:SmoltProdBH2)
 \end{align}
 
 where $\alpha = \kappa/\phi$ and $\beta = \alpha/{C_\textrm{egg-smolt}}$.
@@ -499,13 +511,13 @@ After the hatchery egg production is calculated, the production of yearlings and
   (\#eq:Pyearling4)
 \end{align}
 
+<!--
 Assuming no density-dependent competition with natural-origin juveniles, the outmigrating releases ("smolt releases") is
 
 \begin{equation}
 \textrm{Smolt}^\textrm{Rel}_{y+1} = n^\textrm{subyearling}_{y+1} + n^\textrm{yearling}_{y+1} (\#eq:SmoltRel)
 \end{equation}
 
-<!--
 With competition, the outmigrating abundance is:
 
 $$
@@ -525,8 +537,10 @@ The projection continues in the next year $y+1$ by setting the age-1 juvenile ab
 
 \begin{align}
 N^\textrm{juv,NO}_{y+1,a=1} &= \textrm{Smolt}^\textrm{NOS}_{y+1} + \textrm{Smolt}^\textrm{HOS}_{y+1} (\#eq:NNOnext)\\
-N^\textrm{juv,HO}_{y+1,a=1} &= \textrm{Smolt}^\textrm{Rel}_{y+1} (\#eq:NHOnext)
+N^\textrm{juv,HO}_{y+1,a=1} &= n^\textrm{subyearling}_{y+1} \times s_\textrm{sub-smolt} + n^\textrm{yearling}_{y+1} \times s_\textrm{year-smolt} (\#eq:NHOnext)
 \end{align}
+
+where $s_\textrm{sub-smolt}$ and $s_\textrm{year-smolt}$ is smolting survival after release.
 
 # DERIVED QUANTITIES
 
