@@ -126,7 +126,9 @@ Bio@kappa <- 3
 SMSE@NOS
 ```
 
-Table \@ref(tab:glossary) summarizes the important parameters and state variables described in this document, and where they can be assigned from the input or extracted from the output. <!--CH comment: do we need to add a note that parameter labels match those in the equations in this document. In some cases, these differ from those used in the code, and these differences are described in the code?? or maybe not...-->
+Table \@ref(tab:glossary) summarizes the important parameters and state variables described in this document, and where they can be assigned from the input or extracted from the output. <!--CH comment: I suggest adding a note that parameter labels match those used in the code to the extent possible. However, in some cases they differ, and these differences are noted in the code. 
+I think key differences like log_cr vs alpha should be noted in the code, and p^IRC,NO is premove_NOS, etc. Otherwise it will be confusing.-->
+
 
 \newpage
 

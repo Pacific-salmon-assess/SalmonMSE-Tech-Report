@@ -7,17 +7,16 @@ Variability among simulations is not described here because users have full cont
 Note, the pre-spawn dens-dep relationship (Habitat) does not have random deviations, nor the egg incubation stage dens-dep relationship (Habitat).  
 Also, maturation rates do not have interannual variability, nor does the stray matrix.
 
-
-This may be fine for now (though interannual var in maturation would be great!), but I think we need to be clear about where we can add interannual variabilty, and were tweaks to the code are required before we can add it-->
+I think we need to be clear about where users can add interannual variabilty, and were tweaks to the code are required before we can add it-->
 
 
 
 For example, users manually sample the desired probability density functions to generate Monte Carlo samples of a parameter, or specify the year-specific values of a parameter to create a temporal trend in a parameter. <!--CH: only for the parameters I listed above in my comment-->
 
 ## Juvenile marine abundance and pre-terminal fishery
-<!--CH comment: starting with juvenile abundances is fine, if we have an age-structured CM. However, this presumptoin may be dimissing for other simpler examples with only spawners and recruits. 
+<!--CH comment: starting with juvenile abundances is fine, if we have an age-structured CM. However, this assumption may be dismissing for other simpler examples with only spawners and recruits. 
 
-Also, can we add a pgh or Appnedix that describes how a simulation without juvenile abundance data would be run?-->
+Also, can we  please add a pgh or Appendix that describes how a simulation without juvenile abundance data would be run, i.e., describing what is int article  for simpleSOM() : https://docs.salmonmse.com/articles/simpleSOM.html?-->
 Let $N^\textrm{juv,NO}_{y,a}$ be the natural-origin (NO) juvenile abundance and $N^\textrm{juv,HO}_{y,a}$ be the hatchery-origin (HO) juvenile abundance of age $a$ at the beginning of the year $y$ (juveniles represent the abundance of each age class before returning as spawners).
 
 Harvest in the pre-terminal ($\textrm{PT}$) fishery of juveniles occurs in the first half of the year.
@@ -30,11 +29,13 @@ K^\textrm{HO,PT}_{y,a} &= \left(1 - \exp(-v^\textrm{PT}_a F^\textrm{PT}_y)\right
 
 where $v$ is vulnerability at age and $F$ is instantaneous fishing mortality.
 
-The realized harvest rate $u^\textrm{PT}_y$ in the pre-terminal fishery is used to calculate $F^\textrm{PT}_y$ such that:
+The realized harvest rate $u^\textrm{PT}_y$ in the pre-terminal fishery is derived from total pre-terminal catch divided by total expected return, and is used to calculate $F^\textrm{PT}_y$ such that:
 
 \begin{equation}
 u^\textrm{PT}_y = \frac{\sum_a(K^\textrm{NO,PT}_{y,a} + K^\textrm{HO,PT}_{y,a})\times \textrm{AEQ}_a}{\sum_a\left((K^\textrm{NO,PT}_{y,a} + K^\textrm{HO,PT}_{y,a}) \times \textrm{AEQ}_a + (N^\textrm{juv,NO}_{y,a} + N^\textrm{juv,HO}_{y,a})\exp(-v^\textrm{PT}_a F^\textrm{PT}_y)\times r_a)\right)} (\#eq:PretermHarvestRateTarget)
 \end{equation}
+
+<!--CH comment: suggest explicitly adding the F to u equation here. Maybe simply adding it in-line in the text is fine-->
 
 To facilitate comparison of juvenile catch to adult catch, adult equivalents (AEQ) discount the juvenile catch by how many would have survived to adulthood had it not been caught (through maturity $r$ and natural mortality $M$):
 
@@ -74,7 +75,7 @@ Alternative equations are used if mark-selective fishing is implemented (Appendi
 Modifications for mixed-stock fisheries are described in Appendix \@ref(app:multi).
 
 ## Advance age classes
-
+<!--Ch: should this be 'advanced' age classes?-->
 The juvenile abundance in the next year $y+1$ consists of fish that survived preterminal exploitation, did not mature, and survived natural mortality:
 
 \begin{align}
@@ -128,15 +129,15 @@ Modifications for mixed-stock fisheries are described in Appendix \@ref(app:mult
 
 ## Escapement
 
-The escapement $E$ consists of the survivors of the terminal fishery:
-
+The escapement $E$ consists of the survivors of the terminal fishery<!--CH "and enroute mortality."-->:
+<!-- then add s_entroute to equqaions below-->
 \begin{align}
   E^\textrm{NO}_{y,a} = R^\textrm{NO}_{y,a}\exp(-v^\textrm{T}_aF^\textrm{T}_y) (\#eq:EscapementNO)\\
   E^\textrm{HO}_{y,a} = R^\textrm{HO}_{y,a}\exp(-v^\textrm{T}_aF^\textrm{T}_y) (\#eq:EscapementHO)
 \end{align}
 
 ## Broodtake
-
+<!--CH remove enroute mortality from this section-->
 The escapement from marine fisheries experience en-route mortality and then some proportion may be used for brood.
 Hatchery production operates around the target number of annual releases of sub-yearlings $n^\textrm{subyearling}_\textrm{target}$ and yearlings $n^\textrm{yearling}_\textrm{target}$ specified by the user.
 For the purposes of hatchery releases, yearlings and subyearlings are only differentiated by egg to release survival in the hatchery.
@@ -152,7 +153,7 @@ where $s$ is survival from the egg to the corresponding life stage in the hatche
 
 From here, there are two ways to specify how natural-origin brood (NOB) and hatchery-origin brood (HOB) are taken to reach the release target:
 
-1. The "parametric" approach constrains broodtake based on a combination of parameters that control: (a) target releases, (b) target proportion of natural-origin fish in the brood, and (c) limit of proportion of natural-origin fish to use as brood. 
+1. The "parametric" approach constrains broodtake based on a combination of parameters that control: (a) target releases, (b) target proportion of natural-origin fish in the brood, $p^\textrm{NOB}_\textrm{target}$, and (c) limit of proportion of natural-origin fish to use as brood, $p^\textrm{NOB}_\textrm{max}$. <!--CH: what about pesc_max? This parameter is not defined-->
 These parameters roughly follow the settings used in AHA [@hsrg2020].
 2. Custom brood function that allows user to write an algorithm that calculates brood from the return. The code ensures target releases are not exceeded.
 
@@ -160,7 +161,7 @@ _Parameterization 1: Parameteric brood calculation_
 
 Two parameters control NOB and HOB.
 First, the target proportion of natural-origin fish in the broodstock ($p^\textrm{NOB}_\textrm{target}$) is specified. 
-To minimize genetic drift of the natural spawning population due to hatchery program, it may be desirable to maintain a high proportion of natural-origin broodtake.
+To minimize genetic adaptation of the natural spawning population to the hatchery environment, it may be desirable to maintain a high proportion of natural-origin broodtake.
 
 This target can be achieved if the mark rate is one (all hatchery-origin fish can be identified in the in-river return). 
 If the mark rate is not 1, then $p^\textrm{NOB}_\textrm{target}$ is the target proportion of unmarked fish in the broodtake. Consequently, the realized $p^\textrm{NOB}$ is lower as some unmarked fish are hatchery-origin.
@@ -177,7 +178,7 @@ Natural-origin brood is taken from some proportion $p^\textrm{broodtake,unmarked
 \textrm{NOB}_{y,a} = p^\textrm{broodtake,unmarked}_y \times E^\textrm{NO,avail}_{y,a} (\#eq:NOB)
 \end{equation}
 
-where $E^\textrm{NO,avail}_{y,a} = E^\textrm{NO}_{y,a}\times s_\textrm{enroute} \times p^\textrm{esc}_\textrm{max}$ is a subset of the natural-origin escapement reduced by en-route mortality (with survival $s_\textrm{enroute}$) and limited by $p^\textrm{esc}_\textrm{max}$.
+where $E^\textrm{NO,avail}_{y,a} = E^\textrm{NO}_{y,a}\times s_\textrm{enroute} \times p^\textrm{esc}_\textrm{max}$ <!--CH: I suggsest making this a stand alone equation with a number, like E_HO_avail below--> is a subset of the natural-origin escapement reduced by en-route mortality (with survival $s_\textrm{enroute}$) and limited by $p^\textrm{esc}_\textrm{max}$. <!--CH I dont think pesc_max is defined yet?-->
 
 Hatchery-origin brood could be taken in two ways, either:
 
@@ -206,7 +207,7 @@ E^\textrm{HO,avail}_{y,a} = p^\textrm{hatchery} \times E^\textrm{HO}_{y,a} \time
 (\#eq:HOB-avail2)
 \end{equation}
 
-Some fraction ($p^\textrm{hatchery}$) of the available hatchery-origin escapement returned to the hatchery $p^\textrm{hatchery}$, and a a subset is used for brood.
+Some fraction ($p^\textrm{hatchery}$) of the available hatchery-origin escapement returned to the hatchery $p^\textrm{hatchery}$, and a subset is used for brood.
 
 In either scenario for hatchery-origin brood, imported brood and strays may also be used:
 
@@ -257,9 +258,10 @@ In contrast to Parameterization 1, the custom function allows the user to specif
 The code also reduces brood to ensure the release target is not exceeded.
 
 ## In-river removals
-
-After brood, further removals, e.g. as part of an in-river fishery or to manage natural spawning, is possible.
-The in-river catch (IRC) or natural-origin fish is
+<!--CH: remove s_enroute from this section-->
+After brood, further removals, e.g. as part of an in-river fishery or to manage natural spawning, are possible.
+The in-river catch (IRC) of natural-origin fish is:
+<!--CH: please mention in the code that p^IRC,NO is premove_NOS in the code, and p^IRC,HO is premove_HOS.-->
 
 \begin{equation}
 \textrm{IRC}^\textrm{NO}_{y,a} = p^\textrm{IRC,NO}_y (E^\textrm{NO}_{y,a} \times s_\textrm{enroute} - \textrm{NOB}_{y,a}) (\#eq:IRC-NO)
@@ -335,9 +337,9 @@ Egg production is calculated as
 (\#eq:SpawnOutput2)
 \end{align}
 
-where $\textrm{HOS}_{\textrm{eff}} = \gamma \times \textrm{HOS}$, $p^\textrm{female}$ is the proportion female, $\textrm{Fec}$ is fecundity, and superscripts denote the parentage of the progeny.
+where $\textrm{HOS}_{\textrm{eff}} = \gamma \times \textrm{HOS}$, $p^\textrm{female}$ is the proportion female, $\textrm{Fec}$ is fecundity, $\gamma$ is reduced reproductive success of HOS relative to NOS, and superscripts denote the parentage of the progeny.
 
-The smolt production is interpreted as the age-1 abundance in the following year $y+1$.
+The smolt production is interpreted as the age-1 abundance in the following year $y+1$. <!--CH: can we add a sentence about how equations work if smolt production occurs in year 2 instaed of year 1?-->
 If the smolt production is calculated from the Ricker stock-recruit relationship, effectively over the entire freshwater life stage:
 
 \begin{align}
